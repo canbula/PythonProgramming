@@ -1,5 +1,5 @@
-# Course Name
-Repository for [COURSE NAME] course given by Assoc. Prof. Dr. Bora Canbula 
+# Python Programming
+Repository for Python Programming course given by Assoc. Prof. Dr. Bora Canbula 
 at Computer Engineering Department of Manisa Celal Bayar University.
 
 # Course Information
