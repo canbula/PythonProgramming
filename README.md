@@ -11,3 +11,6 @@ You can find the codes that written in the laboratory in the folder WeekXX.
 # Lecture Notes and Problem Sets
 In the root folder there is a LectureNotes.pdf file, which is updated weekly after every lecture. 
 At the end of the every chapter, you will also find a Problem Set.
+
+# Additional Resources
+Books...
