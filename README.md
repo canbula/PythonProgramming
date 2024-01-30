@@ -12,5 +12,10 @@ You can find the codes that written in the laboratory in the folder WeekXX.
 In the root folder there is a LectureNotes.pdf file, which is updated weekly after every lecture. 
 At the end of the every chapter, you will also find a Problem Set.
 
+# Coding Homeworks
+You can find some coding homeworks in the WeekXX folders, 
+which you should complete in your own forked repository 
+and send a pull request to the original repository.
+
 # Additional Resources
 Books...
