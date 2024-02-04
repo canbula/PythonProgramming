@@ -6,7 +6,7 @@ at Computer Engineering Department of Manisa Celal Bayar University.
 Description of the course.
 
 # Weekly Content
-You can find the codes that written in the laboratory in the folder WeekXX.
+Lectures are on every monday. You can find the codes that written in the laboratory in the folder WeekXX.
 
 # Lecture Notes and Problem Sets
 In the root folder there is a LectureNotes.pdf file, which is updated weekly after every lecture. 
