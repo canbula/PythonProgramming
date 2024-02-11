@@ -3,10 +3,10 @@ Repository for Python Programming course given by Assoc. Prof. Dr. Bora Canbula
 at Computer Engineering Department of Manisa Celal Bayar University.
 
 # Course Information
-Description of the course.
+This course is about basic concepts in Python Programming. Students will learn the data structures, functions, classes, and the special structures of Python. They will also learn how to create basic desktop applications with a GUI, web applications as APIs, basic games as projects. In this course, we will use GitHub actions for assignments. Therefore, it is strongly recommended that to have a GitHub account for students. Students must fork this repository and sync frequently, add their works to their own repository and create a pull request.
 
 # Weekly Content
-Lectures are on every monday. You can find the codes that written in the laboratory in the folder WeekXX.
+Lectures are on every Monday. You can find the codes that written in the laboratory in the folder WeekXX.
 
 # Lecture Notes and Problem Sets
 In the root folder there is a LectureNotes.pdf file, which is updated weekly after every lecture. 
