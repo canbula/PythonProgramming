@@ -17,6 +17,9 @@ You can find some coding homeworks in the WeekXX folders,
 which you should complete in your own forked repository 
 and send a pull request to the original repository.
 
+# Microsoft Teams
+All announcements of this course will be done via Microsoft Teams. Join the group with the invite code: haufqo2
+
 # Additional Resources
 - [Python Documentation](https://docs.python.org/3/)
 - [Python Tutorial](https://docs.python.org/3/tutorial/index.html)
