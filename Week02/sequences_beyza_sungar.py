@@ -6,10 +6,10 @@ my_dict = {"name" : "Beyza",
            "city" : "Eskişehir",
            "age" : 22}
 
-def remove_duplicates(my_list)
+def remove_duplicates(my_list):
    return list(set(my_list))
 
-def list_counts(my_list)
+def list_counts(my_list):
    counts = {}
     for item in input_list:
         if item in counts:
