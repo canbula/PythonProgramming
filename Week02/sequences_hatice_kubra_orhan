@@ -1,0 +1,17 @@
+my_list = [34, 45, 74, 16, 74]
+my_tuple = (3, 5, 9, 8)
+my_set = {"Kübra", 35, 98, 3.5}
+my_dict = {
+    "Name": "Hatice",
+    "Age": "19",
+    "City": "Bursa"
+}
+
+def remove_duplicates(my_list):
+    return list(set(my_list))
+
+def list_counts(my_list):
+    return {element: my_list.count(element) for element in my_list}
+
+def reverse_dict(my_dict):
+    return {value: key for key, value in my_dict.items()}
