@@ -19,7 +19,6 @@ def list_counts(a_list):
 
 def reverse_dict(a_dict):
     new_dict = {}
-    key_list = a_dict.keys()
-    value_list = a_dict.values()
-    new_dict = dict.fromkeys(value_list,key_list)
+    for key, value in a_dict.items():
+        new_dict[value] = key
     return new_dict
