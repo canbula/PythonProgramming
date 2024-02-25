@@ -3,7 +3,7 @@ my_tuple = (5,13,36)
 my_set = {3,5,"hi",7,5}
 my_dict =  { "a": 100, "b":"B","c":True }
 
-def remove_dublicates(a_list):
+def remove_duplicates(a_list):
 
     return list(set(a_list))
 
