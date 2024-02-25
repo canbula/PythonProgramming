@@ -12,10 +12,11 @@ def remove_duplicates(my_list):
 
 def list_counts(my_list):
     new_dict = dict()
-    j = 0
     for item in my_list:
-        new_dict[item] = j
-        j = j + 1
+        if item  in new_dict:
+            new_dict[item] = new_dict[item] + 1
+        else:
+            new_dict[item] = 1
     return new_dict
 
 def reverse_dict(my_dict):
