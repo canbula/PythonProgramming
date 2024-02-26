@@ -1,7 +1,7 @@
 
 my_list = ["Raw Prime Meat", True , 211, "Saddle"]
 my_tuple = "Rex","Pterenadon",215,False,("Raptor","Microraptor")
-my_dictionary = {"Narcotic" :" a tranquilizer", "duration_in_minute":10,}
+my_dict = {"Narcotic" :" a tranquilizer", "duration_in_minute":10,}
 my_set = set(["42",64,"sdad","sad",64,42]) #duplicated values will be removed
 
 
