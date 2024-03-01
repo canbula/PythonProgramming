@@ -8,7 +8,7 @@ def remove_duplicates(my_list):
     return list(set(my_list))
 
 
-def counter(the_list):
+def list_counts(the_list):
     counted = {}
     for element in the_list:
         counted[element] = counted.get(element, 0) + 1
@@ -16,4 +16,5 @@ def counter(the_list):
 
 
 def reverse_dict(dictionary):
-    return dict(reversed(list(dictionary.items())))
+    dictionary = {v: k for k, v in dictionary.items()}
+    return dictionary
