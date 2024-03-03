@@ -1,7 +1,7 @@
 my_list = ["Mert", "Can", "Fidan", "Can", "Fidan",24,24,24]
 my_tuple = ("Mert", "Can", "Fidan")
 my_set = {"Mert", "Can", "Fidan"}
-my_dictionary = {
+my_dict = {
   "name": "Mert Can Fidan",
   "age": 24,
   "alive": True
