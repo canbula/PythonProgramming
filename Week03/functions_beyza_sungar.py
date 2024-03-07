@@ -8,13 +8,6 @@ def custom_equation(x: int =0, y:int=0,/, a: int=1, b:int =1,*,c:int = 1) ->floa
     param a is the third number
     param b is the fourth number
     param c is the fifth number 
-
-    and these parameters have default values:
-    x = 0
-    y = 0
-    a = 1
-    b = 1
-    c = 1
     '''
     return float((x**a + y**b)/c)
 
