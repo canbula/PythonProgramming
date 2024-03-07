@@ -3,11 +3,13 @@ custom_power = lambda x=0,/,e=1 : x**e
 def custom_equation(x: int =0, y:int=0,/, a: int=1, b:int =1,*,c:int = 1) ->float:
     '''
     This function returns x to the power of a plus y to the power of b divided by c,
-    param x is the first number
-    param y is the second number
-    param a is the third number
-    param b is the fourth number
-    param c is the fifth number 
+    :param x : is the first number
+    :param y : is the second number
+    :param a : is the third number
+    :param b : is the fourth number
+    :param c : is the fifth number 
+    :return : As a floating-point number.
+    
     '''
     return float((x**a + y**b)/c)
 
