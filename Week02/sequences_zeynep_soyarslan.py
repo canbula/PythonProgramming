@@ -12,7 +12,6 @@ def remove_duplicates(my_list):
         if i not in new_list:
             new_list.append(i)
     return new_list
-print(remove_duplicates(my_list))
 
 def list_counts(my_list):
     counts = dict()
@@ -22,12 +21,10 @@ def list_counts(my_list):
         else:
             counts[j] = 1
     return counts
-print(list_counts(my_list))
 
 def reverse_dict(my_dict):
     reversed_dict = {}
     for key, value in my_dict.items():
         reversed_dict[value] = key
     return reversed_dict
-print(reverse_dict(my_dict))
 
