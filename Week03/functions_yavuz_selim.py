@@ -11,6 +11,8 @@ def custom_equation(x:int = 0, y:int = 0, /, a:int = 1, b:int = 1, *, c:int = 1)
     :type a: int
     :param b: The coefficient for y in the equation, default is 1
     :type b: int
+    :param c:  A constant term in the equation, default is 
+    :type c: int
     :return : The result of the equation with the given values
     :rtype: int
     """
