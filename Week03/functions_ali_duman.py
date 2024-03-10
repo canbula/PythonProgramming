@@ -22,8 +22,8 @@ def fn_w_counter() -> tuple[int, dict[str, int]]:
 
     # Initialize function attributes
     if not hasattr(fn_w_counter, "total_calls"):
-        fn_w_counter.total_calls = 0  # Toplam çağrı sayısı
-        fn_w_counter.calls_per_caller = {}  # Çağırıcı başına çağrı sayısı
+        fn_w_counter.total_calls = 0
+        fn_w_counter.calls_per_caller = {}
     
     # Increment the total call count
     fn_w_counter.total_calls += 1
