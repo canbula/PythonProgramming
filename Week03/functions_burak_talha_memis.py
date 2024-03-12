@@ -24,5 +24,3 @@ def fn_w_counter() -> (int, dict[str,int]):
         else:
             fn_w_counter.callers[__name__] = 1
     
-    print(f"This function has been called {fn_w_counter.counter} times")
-    print(f"Callers: {fn_w_counter.callers}")
