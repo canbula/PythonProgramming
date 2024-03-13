@@ -12,7 +12,7 @@ def remove_duplication(a_list):
 
 
 def list_counts(a_list):
-    return {i: my_list.count(i) for i in my_list}
+    return {i: a_list.count(i) for i in a_list}
 
 
 def reverse_dict(my_dict):
