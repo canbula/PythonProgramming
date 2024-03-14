@@ -107,6 +107,11 @@ def test_validate_emails():
             assert str(e.type) == "<class 'ValueError'>", (
                 "The validate method does not allow only valid email addresses in " + f[:-3]
             )
+        with pytest.raises(ValueError) as e:
+            eval(f[:-3]).Emails(["bora@canbulacom"])
+            assert str(e.type) == "<class 'ValueError'>", (
+                "The validate method does not allow only valid email addresses in " + f[:-3]
+            )
 
 
 # check Emails class does not allow duplicate email addresses, the order is not important
