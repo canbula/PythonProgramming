@@ -26,4 +26,4 @@ class Emails(list):
             if isinstance(email, int):
                 raise ValueError("Only string values accepted!")
             if not re.match(regex_pattern, email):
-                raise ValueError("This is not an email adress!")
+                raise ValueError(f"Invalid email format: {email}") 
