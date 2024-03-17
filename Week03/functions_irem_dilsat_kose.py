@@ -1,4 +1,4 @@
-custom_power = lambda x, e=1 : x**e
+custom_power = lambda x, /, e=1 : x**e
 
 def custom_equation(x, y, /, a=1, b=1, *, c=1)-> float:
     """
@@ -14,6 +14,8 @@ def custom_equation(x, y, /, a=1, b=1, *, c=1)-> float:
     :type b:int
     :param c:The fifth number, default=1
     :type c:int
+    :return: The result of the equation (x**a + y**b)/c
+    :rtype: float
 
     """
     return (x**a + y**b) / c
