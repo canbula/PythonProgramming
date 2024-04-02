@@ -1,18 +1,18 @@
-custom_power = lambda x, /, e=1 : x**e
+custom_power = lambda x=0, /, e=1 : x**e
 
-def custom_equation(x: int, y: int, /, a: int = 1, b: int = 1, *, c: int = 1)-> float:
+def custom_equation(x: int = 0, y: int = 0, /, a: int = 1, b: int = 1, *, c: int = 1)-> float:
     """
     This function computes the expression (x**a + y**b)/c
 
-    :param x:The first number, default=0
+    :param x:The first number, default is 0
     :type x:int
-    :param y:The second number, default=0
+    :param y:The second number, default is 0
     :type y:int
-    :param a:The third number, default=1
+    :param a:The third number, default is 1
     :type a:int
-    :param b:The fourth number, default=1
+    :param b:The fourth number, default is 1
     :type b:int
-    :param c:The fifth number, default=1
+    :param c:The fifth number, default is 1
     :type c:int
     :return: The result of the equation (x**a + y**b)/c
     :rtype: float
