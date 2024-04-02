@@ -1,6 +1,6 @@
 custom_power = lambda x, /, e=1 : x**e
 
-def custom_equation(x, y, /, a=1, b=1, *, c=1)-> float:
+def custom_equation(x: int, y: int, /, a: int = 1, b: int = 1, *, c: int = 1)-> float:
     """
     This function computes the expression (x**a + y**b)/c
 
