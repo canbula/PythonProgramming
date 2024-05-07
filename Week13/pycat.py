@@ -290,11 +290,13 @@ class CoursesPanel(wx.Panel):
             self.courses_grid.DeleteRows(0, self.courses_grid.GetNumberRows())
         courses = self.f.ref.child("courses").get()
         if courses:
-            for i, course in enumerate(courses):
+            i = 0
+            for course in enumerate(courses):
                 if courses[course]["user_id"] == self.professor.user_id:
                     self.courses_grid.AppendRows(1)
                     self.courses_grid.SetCellValue(i, 0, courses[course]["title"])
                     self.courses_grid.SetCellValue(i, 1, courses[course]["description"])
+                    i += 1
 
     def on_add_course(self, event):
         course = Course(self.professor.user_id, self.f)
