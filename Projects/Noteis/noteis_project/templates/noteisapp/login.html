@@ -1,0 +1,106 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif; /* Using Roboto font */
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+    
+    .container {
+      max-width: 400px;
+      margin: 30px auto;
+      background: linear-gradient(to bottom, #ffffff, #f0f0f0); /* Gradient background */
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Enhanced box shadow */
+    }
+    
+    .container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 10px;
+      color: #555;
+    }
+    
+    .form-group input {
+      width: calc(100% - 20px); /* Adjusted width */
+      padding: 12px;
+      border: 2px solid #ccc; /* Increased border thickness */
+      border-radius: 25px; /* More rounded corners */
+      font-size: 16px; /* Increased font size */
+      font-weight: 500; /* Added font weight */
+      transition: border-color 0.3s; /* Smooth border color transition */
+    }
+    
+    .form-group input:focus {
+      border-color: #007bff; /* Border color on focus */
+    }
+    
+    button {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(to right, #007bff, #0056b3); /* Gradient background for button */
+      border: none;
+      border-radius: 25px;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.3s; /* Smooth background color transition */
+      font-size: 18px; /* Increased font size */
+      font-weight: 600; /* Added font weight */
+    }
+    
+    button:hover {
+      background: linear-gradient(to right, #0056b3, #007bff); /* Gradient background on hover */
+    }
+    
+    .alert {
+      background: linear-gradient(to right, #dc3545, #c82333); /* Gradient background for alert */
+      color: #fff;
+      padding: 12px;
+      border-radius: 15px;
+      margin-bottom: 15px;
+      font-size: 16px; /* Increased font size */
+      font-weight: 500; /* Added font weight */
+    }
+    
+    
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Login Page</h2>
+    {% if error_message %}
+      <div class="alert">{{error_message}}</div>
+    {% endif %}
+    <form method="post">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="id_email">Email:</label>
+        <input type="email" id="id_email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="id_password">Password:</label>
+        <input type="password" id="id_password" name="password" required>
+      </div>
+      <button type="submit">Login</button>
+    </form>
+    <p>Don't have an account ? <a href="{% url 'register'%}">Register</a></p>
+  </div>
+</body>
+</html>
