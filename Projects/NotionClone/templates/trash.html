@@ -1,0 +1,77 @@
+{% extends 'layout.html' %}
+
+{% load static %}
+
+{% block css_files %}
+    {{ block.super }} 
+    <link rel="stylesheet" href="{% static 'block/css/style.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/sidebar.css' %}">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+{% endblock  %}
+
+{% block title %}
+     Çöp Kutusu
+{% endblock %}
+
+{% block content %}
+    <style>
+        .trash-can {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            animation: trashAnimation 1s infinite alternate;
+        }
+
+        @keyframes trashAnimation {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(10px);
+            }
+        }
+    </style>
+    <div class="row">
+        <div class="col-2">
+            {% include 'includes/sidebar.html' %}
+        </div>
+        <div class="col-10">
+
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="d-flex align-items-center justify-content-center mb-4">
+                    <div class="trash-can">
+                        <i class="fas fa-trash-alt fa-3x"></i>
+                    </div>
+                  
+                    
+                </div>
+
+                <div class="list-group shadow">
+                    <a href="{% url 'deleted_posts' %}" class="list-group-item list-group-item-action"> 
+                        <i class="fas fa-trash-alt mr-2 text-danger"></i>  Deleted Notes
+                    </a>
+                 
+                    <a href="{% url 'deleted_birthdays' %}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-trash-alt mr-2 text-danger"></i> Deleted Birthdays
+                    </a>
+                    <a href="{% url 'deleted_movies' %}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-trash-alt mr-2 text-danger"></i>  Deleted Movies
+                    </a>
+                    
+                    <a href="{% url 'deleted_events' %}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-trash-alt mr-2 text-danger"></i> Deleted Events
+                    </a>
+                    <!-- Buraya çöp kutusunda bulunan öğelerin listesi gelebilir -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

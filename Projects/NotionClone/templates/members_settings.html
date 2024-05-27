@@ -1,0 +1,88 @@
+{% extends 'layout.html' %}
+
+{% load static %}
+{% block css_files %}
+    {{ block.super }} 
+    <link rel="stylesheet" href="{% static 'block/css/style.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/sidebar.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/add_page.css' %}">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #f8f9fa; /* Background color */
+        }
+        .form-container {
+            background-color: #ffffff; /* Form background color */
+            border-radius: 10px; /* Border radius */
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1); /* Box shadow */
+            padding: 30px; /* Increased padding */
+            margin-top: 100px; /* Increased top margin */
+        }
+        .form-control {
+            padding: 15px; /* Increased form elements padding */
+        }
+    </style>
+{% endblock  %}
+
+{% block title %}
+     Change Password
+{% endblock %}
+
+{% block content %}
+    {% include 'includes/sidebar.html' %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card "style ="margin-top:50px; margin-left:100px">
+                    <div class="card-header align-items-center d-flex">
+                        <h4 class="card-title mb-0 flex-grow-1">Password Update</h4>
+                        <div class="flex-shrink-0">
+                            
+                        </div>
+                    </div><!-- end card header -->
+
+                    <div class="card-body">
+                        <p class="text-muted">You can update your password here. Things to consider:<br/>
+                            - Your password cannot be too similar to your other personal information.<br/>
+- Your password must be at least 8 characters long.<br/>
+- Your password cannot be a commonly used password.<br/>
+- Your password cannot be entirely numeric.
+                        </p>
+                       
+                        <form action="{% url 'change_password' %}" method="post">
+                            {% csrf_token %}
+                            
+                            {{ form.old_password.label_tag }}
+                            {{ form.old_password }}
+                            <br>
+                            {{ form.new_password1.label_tag }}
+                            {{ form.new_password1 }}
+                            <br>
+                            {{ form.new_password2.label_tag }}
+                            {{ form.new_password2 }}
+                            <br>
+                            <button type="submit" class="btn btn-primary btn-animation waves-effect waves-light" style="display: block; margin: 0 auto; width: 150px " data-text="Update Password"><span>Update Password</span></button>
+                        </form>
+                        
+
+
+
+
+                            
+                        </div>
+                    </div>
+                </div> <!-- end col -->
+            
+            </div>
+            <!-- end row -->
+        
+        </div>
+
+    </div> <!-- container-fluid -->
+</div>
+<!-- End Page-content -->
+    </div>
+{% endblock %}
