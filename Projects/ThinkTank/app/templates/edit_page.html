@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>Edit Page</h2>
+    <form method="POST" action="{{ url_for('edit_page', page_id=page.id) }}">
+        {{ form.hidden_tag() }}
+        <div>
+            {{ form.title.label }} {{ form.title() }}
+        </div>
+        <div>
+            {{ form.content.label }} {{ form.content() }}
+        </div>
+        <div>
+            {{ form.submit() }}
+        </div>
+    </form>
+{% endblock %}
