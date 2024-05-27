@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Goose</title>
+    <link rel="icon" href="images/logo0.jpeg" type="image/x-icon">
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- My CSS -->
+    <link href="static/style.css" rel="stylesheet">
+    <!-- FontAwesome CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap JS, Popper.js-->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- My JavaScript -->
+    <script src="static/script.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown">
+                <button type="button" class="btn btn-dark">
+                    <span class="d-block">
+                             <div class="fa-2x">Cyber Goose</div>
+                        </span>
+                </button>
+            </li>
+            <li class="nav-item dropdown">
+                <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown">
+                    <span class="d-block">
+                            <i class="fas fa-file-invoice fa-2x"></i>
+                        </span>
+                        <span class="d-block">Dosya</span>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#" onclick="fileInfOpen()">Dosya Bilgileri </a>
+                    <a class="dropdown-item" href="#" onclick="deleteFileFromLocal()">PC 'Den Sil</a>
+                    <a class="dropdown-item" href="#" onclick="deleteFileFromServer()">Serverdan Sil</a>
+                    <a class="dropdown-item" href="#">Yeni dosya</a>
+                    <a class="dropdown-item" href="#">Yeni klasör</a>
+                    <a class="dropdown-item" href="#">Yeni şifrelenmiş kasa</a>
+                    <a class="dropdown-item" href="#">Yeniden adlandır</a>
+                    <a class="dropdown-item" href="#">Kopyala</a>
+                    <a class="dropdown-item" href="#">Dosyaları Aç</a>
+                    <a class="dropdown-item" href="#" onclick="fileInfOpen()">Bilgiler</a>
+                </div>
+               
+            </li>
+            
+            <li class="nav-item dropdown">
+                <button type="button" class="btn btn-dark" onclick="openBookMarksList()">
+                    <span class="d-block">
+                        <i class="fas fa-bookmark fa-2x"></i>
+                        </span>
+                        <span class="d-block">Yer İmi</span>
+                </button>
+               
+            </li>            
+            <li class="nav-item dropdown">
+                <button type="button" class="btn btn-dark" onclick="serverConnFunc()">
+                    <span class="d-block">
+                            <i class="fas fa-globe-americas fa-2x"></i>
+                        </span>
+                        <span class="d-block">Bağlantıyı Aç</span>
+                </button>   
+            </li>
+            <li class="nav-item dropdown">
+                <button type="button" class="btn btn-dark  dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                    <span class="d-block">
+                            <i class="fas fa-cog fa-2x"></i>
+                        </span>
+                        <span class="d-block">İşlem</span>
+                    </button>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Yeni sembolik bağlantı</a>
+                    <a class="dropdown-item" href="#">Adresi Kopyala</a>
+                    <a class="dropdown-item" href="#">Adresi Aç</a>
+                    <a class="dropdown-item" href="#">Dosyaları iste Aç</a>
+                    <a class="dropdown-item" href="#">Bilgiler</a>
+                    <a class="dropdown-item" href="#">Eşitle</a>
+                    <a class="dropdown-item" href="#">Yeni Tarayıcı</a>
+                    <a class="dropdown-item" href="#">Yeni Yer İmi</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <button type="button" class="btn btn-dark">
+                    <span class="d-block">
+                            <i class="fas fa-info-circle fa-2x"></i> 
+                        </span>
+                        <span class="d-block">Bilgi Al</span>
+                    </button>
+            </li>
+            <li class="nav-item dropdown">
+                <button type="button" class="btn btn-dark" onclick="yenile()">
+                    <span class="d-block"> 
+                            <i class="fas fa-sync-alt fa-2x"></i>
+                        </span>
+                        <span class="d-block">Yenile</span>
+                    </button>
+            </li>
+            <li class="nav-item dropdown">
+                <button type="button" class="btn btn-dark  dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                    <span class="d-block">
+                            <i class="fas fa-pencil-alt"></i> 
+                        </span>
+                        <span class="d-block">Düzenle</span>
+                    </button>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Kes</a>
+                    <a class="dropdown-item" href="#">Kopyala</a>
+                    <a class="dropdown-item" href="#">Adresi Kopyala</a>
+                    <a class="dropdown-item" href="#">Yapıştır</a>
+                    <a class="dropdown-item" href="#">Tümünü Seç</a>
+                    <a class="dropdown-item" href="#">Ayarlar</a>
+    
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                    <button type="button" class="btn btn-dark" onclick="uploadFile()">
+                        <span class="d-block">
+                            <i class="fas fa-upload fa-2x"></i> 
+                        </span>
+                        <span class="d-block">Yükle</span>
+                    </button>
+            </li>
+
+            <li class="nav-item dropdown">
+                <button type="button" class="btn btn-dark" onclick="downloadFile()">
+                    <span class="d-block">
+                            <i class="fas fa-download fa-2x"></i> 
+                        </span>
+                        <span class="d-block">İndir</span>
+                </button>
+            </li>
+            <li class="nav-item dropdown">
+                    <button type="button" class="btn btn-dark"  aria-haspopup="true" aria-expanded="false" onclick="closeConn()" >
+                        <span class="d-block">
+                            <i class="fas fa-arrow-up fa-2x"></i>
+                        </span>
+                        <span class="d-block">Bağlantıyı Kes</span>
+                    </button>                
+            </li>
+        </ul>
+    </div>
+</nav>
+<div id="comp-table" class="my-pc-win sidebar-sticky">
+    <div class="localpathdiv"><input type ="text" id="filepath">
+        <button onclick="turnBackLocal()" id="btntrnbck" class="btn btn-outline-dark">
+            <span class="d-block"><i class="fas fa-arrow-left"></i></span>
+        </button>
+        <button onclick="getLocalFiles()" id="btnpath" class="btn btn-outline-dark">
+            <span class="d-block"><i class="fas fa-arrow-right"></i></span>
+        </button>
+    </div>
+    <table class="table  table-hover">
+    <thead>
+        <tr>
+            <th>Sıra</th>
+            <th>Dosya Adı</th>
+            <th>Zaman Damgası</th>
+            <th>Boyut</th>
+        </tr>
+    </thead>
+    <tbody id="files_tables_body">
+
+    </tbody>
+    </table>
+</div>
+
+<div id="dosya_tablosu" class="server-win">
+    <div class="serverpathdiv">
+        <input type ="text" id="serverfilepath">
+        <button onclick="turnBackServer()" id="btntrnbcksrv" class="btn btn-outline-dark">
+            <span class="d-block"><i class="fas fa-arrow-left"></i></span>
+        </button>
+        <button onclick="getServersFiles()" id="btnserverpath" class="btn btn-outline-dark">
+            <span class="d-block">
+                <i class="fas fa-arrow-right"></i>
+            </span>
+        </button>
+    </div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Sıra</th>
+                <th>Dosya Adı</th>
+                <th>Değişim Zamanı</th>
+                <th>Boyut</th>
+            </tr>
+        </thead>
+        <tbody id="server_tables_body"></tbody>
+</div>
+
+
+</body>
+</html>
