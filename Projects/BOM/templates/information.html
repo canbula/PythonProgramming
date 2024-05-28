@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <title>Information Form</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+
+        .navbar {
+            background-color: #FF3300;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .user-menu, .left-menu {
+            display: inline-block;
+            color: white;
+            cursor: pointer;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .form-container h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: calc(100% - 16px);
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .button-container {
+            text-align: right;
+            margin-top: 20px;
+        }
+
+        .button-container button {
+            padding: 10px 20px;
+            background-color: #FF3300;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .button-container button:hover {
+            background-color: #FF9900;
+        }
+
+        .button {
+            --bg: #000;
+            --hover-bg: #FF3300;
+            --hover-text: #000;
+            color: #fff;
+            cursor: pointer;
+            border: 1px solid var(--bg);
+            border-radius: 4px;
+            padding: 0.8em 2em;
+            background: var(--bg);
+            transition: 0.2s;
+        }
+
+        .button:hover {
+            color: var(--hover-text);
+            transform: translate(-0.25rem, -0.25rem);
+            background: var(--hover-bg);
+            box-shadow: 0.25rem 0.25rem var(--bg);
+        }
+
+        .button:active {
+            transform: translate(0);
+            box-shadow: none;
+        }
+        .add-button {
+            align-self: flex-end;
+            background-color: green !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar">
+        <div class="left-menu">
+            <a href="{{ url_for('userpage', user_id=user_data.user_id) }}">BOM</a>
+        </div>
+        <div class="user-menu dropdown">
+            <span class="kullanıcı_ısım">{{ user_data.username }}</span>
+            <div class="dropdown-content">
+                <a href="{{ url_for('information', user_id=user_data.user_id) }}">Update</a>
+                <a href="{{ url_for('logout') }}">Exit</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-container">
+        <h1>Information Form</h1>
+        <form method="POST" action="{{ url_for('information', user_id=user_data.user_id) }}">
+            <div class="form-group">
+                <label for="fullname">Full Name:</label>
+                <input type="text" id="fullname" name="fullname" value="{{ user_data.fullname }}" required>
+            </div>
+            <div class="form-group">
+                <label for="university">University:</label>
+                <input type="text" id="university" name="university" value="{{ user_data.university}}" required>
+            </div>
+            <div class="form-group">
+                <label for="department">Department:</label>
+                <input type="text" id="department" name="department" value="{{ user_data.department }}" required>
+            </div>
+            <div class="button-container">
+                <button type="submit" class="button  add-button">Save</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+
+</html>

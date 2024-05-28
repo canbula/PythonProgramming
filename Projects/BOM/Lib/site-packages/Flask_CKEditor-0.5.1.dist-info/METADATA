@@ -1,0 +1,42 @@
+Metadata-Version: 2.1
+Name: Flask-CKEditor
+Version: 0.5.1
+Summary: CKEditor integration for Flask.
+Home-page: http://github.com/helloflask/flask-ckeditor
+Author: Grey Li
+Author-email: withlihui@gmail.com
+License: MIT
+Platform: any
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: Flask
+
+
+Flask-CKEditor
+--------------
+
+CKEditor integration for Flask, including image upload, code syntax
+highlighting, and more.
+
+Features:
+
+* Integrate with Flask-WTF/WTForms.
+* Configure CKEditor through Flask's configuration system.
+* Image upload support.
+* Code snippet highlighting.
+* Built-in CKEditor resources.
+
+
