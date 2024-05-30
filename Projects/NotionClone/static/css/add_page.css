@@ -1,0 +1,33 @@
+body {
+    background-color: #333; /* Koyu gri arka plan rengi */
+    color: #6c6a6a; /* Yazı rengi */
+}
+
+.form-custom-height {
+    height: 300px; /* Form yüksekliğini buradan ayarlayabilirsiniz */
+}
+
+
+textarea {
+    background-color: #333; /* Textarea'nın arka plan rengini belirler */
+    color: #696262; /* Yazı rengi */
+    border: 1px solid #333; /* Kenarlık rengi */
+}
+
+.input-background input[type="text"],
+.input-background textarea {
+    background-color:  #333; /* Arka plan rengini miras alır */
+    color: #989393; /* Yazı rengi */
+    border: 1px solid #5e5f60; /* Kenarlık rengi */
+    padding: 10px; /* İç kenar boşluğu */
+}
+
+.input-background input[type="text"]:focus,
+.input-background textarea:focus {
+    background-color:  #333; /* Tıklama durumunda arka plan rengini miras alır */
+    color: #333; /* Yazı rengi */
+    border-color: #5b5c5d; /* Kenarlık rengi */
+}
+
+
+
