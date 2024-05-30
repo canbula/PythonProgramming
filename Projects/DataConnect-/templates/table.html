@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table: {{ table_name }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            display: flex;
+            height: 100vh;
+        }
+        .sidebar {
+            width: 250px;
+            background: #333;
+            color: white;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .sidebar h1 {
+            text-align: center;
+        }
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .sidebar li {
+            padding: 10px;
+            background: #444;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+        .sidebar li a {
+            color: white;
+            text-decoration: none;
+        }
+        .sidebar li:hover {
+            background: #555;
+        }
+        .content {
+            flex: 1;
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        th {
+            background: #007bff;
+            color: white;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background: #0056b3;
+        }
+        .btn-update {
+            background: #ffc107;
+        }
+        .btn-update:hover {
+            background: #e0a800;
+        }
+        .btn-delete {
+            background: #dc3545;
+        }
+        .btn-delete:hover {
+            background: #c82333;
+        }
+        .back-btn {
+            background: #28a745;
+        }
+        .back-btn:hover {
+            background: #218838;
+        }
+        .flash-error {
+            color: red;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h1>SQLite Database Browser</h1>
+        <h2>Tables</h2>
+        <ul>
+            {% for table in tables %}
+                <li><a href="{{ url_for('select_table', table_name=table) }}">{{ table }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="content">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <h1>Table: {{ table_name }}</h1>
+        <table>
+            <thead>
+                <tr>
+                    {% for column in columns %}
+                        <th>{{ column }}</th>
+                    {% endfor %}
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in data %}
+                    <tr>
+                        {% for item in row %}
+                            <td>{{ item }}</td>
+                        {% endfor %}
+                        <td>
+                            <a href="{{ url_for('update_data', table_name=table_name, id=row['id']) }}" class="btn btn-update">Update</a>
+                            <form action="{{ url_for('delete_data', table_name=table_name, id=row['id']) }}" method="post" style="display:inline;">
+                                <button type="submit" class="btn btn-delete">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{{ url_for('add_data', table_name=table_name) }}" class="btn">Add Data</a>
+        <a href="{{ url_for('index') }}" class="btn back-btn">Back to Main</a>
+    </div>
+</body>
+</html>
