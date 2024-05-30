@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YER İMLERİ</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- My CSS -->
+    <link href="static/style.css" rel="stylesheet">
+    <!-- FontAwesome CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap JS, Popper.js-->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- My JavaScript -->
+    <script src="static/bookmarkscript.js"></script>
+    <style>
+        .container-custom {
+            margin-left: 10px !important;
+            padding-left: 10px !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-custom mt-5">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">SIRA</th>
+                    <th scope="col">BAĞLANTI ADI</th>
+                    <th scope="col">BAĞLANTI TİPİ</th>
+                    <th scope="col">HOSTNAME</th>
+                    <th scope="col">PORT</th>
+                    <th scope="col">USERNAME</th>
+                    <th scope="col">PASSWORD</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+
+                </tr>
+            </thead>
+            <tbody id="bookmark_table">
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td></td>
+                    <td><input type="text" id="new_connection_name" class="form-control"></td>
+                    <td><input type="text" id="new_connection_type" class="form-control"></td>
+                    <td><input type="text" id="new_hostname" class="form-control"></td>
+                    <td><input type="text" id="new_port" class="form-control"></td>
+                    <td><input type="text" id="new_username" class="form-control"></td>
+                    <td><input type="password" id="new_password" class="form-control"></td>
+                    <td><button type="button" class="btn btn-success" onclick="saveBookmark()">Kaydet</button></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,148 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block css_files %}
+  {{ block.super }}
+  <link rel="stylesheet" href="{% static 'block/css/style.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'css/sidebar.css' %}" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.2/main.min.css" />
+{% endblock %}
+
+{% block title %}
+  Films
+{% endblock %}
+
+{% block content %}
+
+  <style>
+    .modal-content {
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Buradaki değerler size göre ayarlanabilir */
+    }
+  </style>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3">
+        {% include 'includes/sidebar.html' %}
+      </div>
+
+      <div class="col-md-8">
+        <div class="container mt-5">
+          <div class="d-flex justify-content-end mb-3">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addFilmModal">Add Movie</button>
+          </div>
+          <h2><span style="font-weight: bold; font-style: italic; text-decoration: underline;">Movie List</span></h2>
+          <br />
+          <br />
+          <div class="row">
+            {% for movie in movies %}
+              <div class="col-md-4 mb-4">
+                <div class="card" style="box-shadow: 0px 0px 10px rgba(0, 0, 255, 0.5);">
+                  <div class="card-body">
+                    <form method="post" action="{% url 'delete_movie' movie_id=movie.id %}">
+                      {% csrf_token %}
+                      <button class="btn btn-danger btn-sm delete-birthday" style="position: absolute; top: 2px; right: 2px;"><i class="fas fa-trash-alt"></i></button>
+                    </form>
+                    <h5 class="card-title">{{ movie.title }}</h5>
+                    <p class="card-text">{{ movie.description }}</p>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="addFilmModal" tabindex="-1" role="dialog" aria-labelledby="addFilmModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #ADD8E6;">
+          <h5 class="modal-title" id="addFilmModalLabel"><i class="fas fa-film"></i> Add Movie</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="modal-body">
+          <form action="" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="filmName">Movie Name</label>
+              <input type="text" class="form-control" required placeholder="Movie Name" name="title" />
+            </div>
+            <div class="form-group">
+              <label for="filmDescription">Movie description</label>
+              <textarea class="form-control" name="description" required rows="3"></textarea>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+    </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="movieDetailsModal" tabindex="-1" role="dialog" aria-labelledby="movieDetailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="movieDetailsModalLabel">Movie Details</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="modal-body">
+          <h5 id="movieTitle"></h5>
+          <p id="movieDescription"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $('#addFilmModal').on('shown.bs.modal', function () {
+      $('#filmName').focus()
+    })
+  
+    $('#addFilmModal').on('hidden.bs.modal', function () {
+      $(this).find('form').trigger('reset')
+    })
+  
+    $('#addFilmModal').on('click', '.btn-primary', function () {
+      var filmName = $('#filmName').val()
+      var filmDescription = $('#filmDescription').val()
+  
+      $.ajax({
+        type: 'POST',
+        url: '/add_film/', // Buraya film ekleme URL'sini girin
+        data: {
+          film_name: filmName,
+          film_description: filmDescription,
+          csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+        },
+        success: function (response) {
+          // Başarı mesajını göster veya modalı kapat
+          alert('Film başarıyla eklendi!')
+          $('#addFilmModal').modal('hide')
+        },
+        error: function (xhr, errmsg, err) {
+          // Hata mesajını göster
+          alert('Film eklenirken bir hata oluştu!')
+        }
+      })
+    })
+  })
+</script>
+
+<script>
+  function showMovieDetails(title, description) {
+    $('#movieTitle').text(title)
+    $('#movieDescription').text(description)
+    $('#movieDetailsModal').modal('show')
+  }
+</script>

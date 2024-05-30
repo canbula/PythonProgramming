@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Information</title>
+    <link rel="icon" href="images/logo0.jpeg" type="image/x-icon">
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap JS, Popper.js-->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+        #savebtn {
+            margin-left: 400px;
+        }
+
+        .column1{
+            width: 100px;
+        }
+        .column2{
+            width: 150px;
+        }
+        .inpt {
+            width: 300px;
+            border: none;
+            background-color: transparent;
+            color: black;
+        }
+    </style>
+   
+
+</head>
+<body>
+    <div class="container">
+        <h4 class="my-4" style="color: cadetblue;">File Information</h4>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead class="thead-light">
+                    <tr><th class="column1">File Name</th><td class="column2"><input type="text" class="inpt" id="filename" disabled/></td></tr>
+                    <tr><th class="column1">File Path</th><td class="column2"><input  type="text" class="inpt" id="filepath" disabled/></td></tr>
+                    <tr><th class="column1">File Type</th><td class="column2"><input  type="text" class="inpt" id="filetype" disabled/></td></tr>
+                    <tr><th class="column1">File Size</th><td class="column2"><input type="text" class="inpt" id="filesize" disabled/></td></tr>
+                    <tr><th class="column1">File Change</th><td class="column2"><input type="text" class="inpt" id="filechange" disabled/></td></tr>
+                    <tr><th class="column1">File Mod</th><td class="column2"><input type="text" class="inpt"  id="filemod"/></td></tr>
+                    <tr><td colspan="2"> <button class="btn btn-primary" class="inpt" id="savebtn" onclick="fileInfUpdate()">SAVE</button></td></tr>
+                </thead>
+            </table>
+            
+        </div>
+    </div>
+    <script src="static/fileinfscript.js"></script>
+    <!-- Bootstrap JS and dependencies -->
+</body>
+</html>
