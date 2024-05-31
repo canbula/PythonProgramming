@@ -1,0 +1,52 @@
+{% extends "authentication/base.html" %}
+{% load static %}
+{% block title %}
+    Login
+{% endblock title %}
+
+{% block content %}
+<div class="container d-flex flex-column h-100">
+    <div class="row align-items-center justify-content-start">
+      <div class="col-2 mt-4">
+        <img src="{% static "images/logo-dark.png" %}" alt="Logo" class="img-fluid mt-4" style="max-width: 48px;">
+      </div>
+    </div>
+    <div class="row align-items-center justify-content-center mt-5">
+     <div class="row justify-content-center mt-5">
+        <div class="col-md-4">
+        <h4>Cool Notes :)</h4>
+        <h5 class="text-secondary">Login to your Pytonotes account</h5>
+        <hr>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center mt-1">
+      <div class="col-md-4">
+        <form method="POST" action="{% url 'user:login' %}" id="login-form">
+            {% csrf_token %}
+            {% if phaseOne %}
+                <div class="mb-3">
+                    &nbsp;<label for="email" class="form-label text-secondary">Email</label>
+                    {{ form.email }}
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Continue</button>
+            {% else %}
+              <div class="mb-3">
+                &nbsp;<label for="email" class="form-label text-secondary">Email</label>
+                {{ form.email }}
+              </div>
+              <div class="mb-3">
+                &nbsp;<label for="password" class="form-label text-secondary">Password</label>
+                {{ form.password }}
+              </div>
+              <h6 class="mb-4"><a class="link-offset-2 link-underline link-underline-opacity-0" href="#">Forgot your password?</a></h6>
+              <button type="submit" class="btn btn-primary w-100">Continue with password</button>
+            {% endif %}
+        </form>
+        <div class="mt-3">
+            {{ form.field.errors }}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

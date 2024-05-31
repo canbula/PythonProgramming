@@ -1,0 +1,48 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+  Login
+{% endblock %}
+
+{% block content %}
+
+    {% include "includes/_nav.html" %}
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <div class="bg-white text-center">
+                    <h4 class="mb-5" style="color: rgb(172, 171, 169);">Log in to your Notion account</h4>
+                </div>
+                <div class="text">
+                    
+                    <form action="{% url 'user_login' %}" method="POST" class="mx-auto col-md-8" novalidate>
+                        {% csrf_token %}
+                        
+                        {% for error in form.non_field_errors %}
+                            <div class="alert alert-danger">
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+
+                        {% for field in form %}
+                            <div class="form-group text-left mb-2 {% if field.errors %}invalid{% endif %}">
+                                {% if field.errors %}
+                                    <div class="alert alert-danger pb-0">{{ field.errors }}</div>
+                                {% endif %}
+                                
+                                <label for="field.id_for.label" style="margin-bottom: 4px;">{{ field.label }}</label>
+                                {{ field }}
+                            </div>
+                        {% endfor %}
+
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-secondary">Login</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock  %}

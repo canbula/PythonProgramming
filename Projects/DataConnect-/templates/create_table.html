@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Table</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            display: flex;
+            height: 100vh;
+        }
+        .sidebar {
+            width: 250px;
+            background: #333;
+            color: white;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .sidebar h1 {
+            text-align: center;
+        }
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .sidebar li {
+            padding: 10px;
+            background: #444;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+        .sidebar li a {
+            color: white;
+            text-decoration: none;
+        }
+        .sidebar li:hover {
+            background: #555;
+        }
+        .content {
+            flex: 1;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background: #0056b3;
+        }
+        .back-btn {
+            background: #28a745;
+        }
+        .back-btn:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h1>SQLite Database Browser</h1>
+        <h2>Tables</h2>
+        <ul>
+            {% for table in tables %}
+                <li><a href="{{ url_for('select_table', table_name=table) }}">{{ table }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="content">
+        <h1>Create Table</h1>
+        <form method="POST">
+            <div class="form-group">
+                <label for="table_name">Table Name</label>
+                <input type="text" id="table_name" name="table_name" required>
+            </div>
+            <div class="form-group">
+                <label for="columns">Columns (e.g., id INTEGER PRIMARY KEY, name TEXT)</label>
+                <input type="text" id="columns" name="columns" required>
+            </div>
+            <button type="submit" class="btn">Create Table</button>
+        </form>
+        <a href="{{ url_for('index') }}" class="btn back-btn">Back to Main</a>
+    </div>
+</body>
+</html>
