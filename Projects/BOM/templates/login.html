@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giriş Yap</title>
+    <style>
+        /* Sayfa stilleri */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f3f3f3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input[type="text"], input[type="mail"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus, input[type="mail"]:focus, input[type="password"]:focus {
+            border-color: #007BFF;
+            outline: none;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background-color: #FF3300;
+            color: #FFFFFF;
+            border:1px solid #FF3300;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .signup-button {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: block;
+            width: 50%;
+            padding: 5px;
+            background-color: #FFFFFF;
+            color: black;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+            text-align: right;
+            text-decoration: none;
+            margin-left:auto;
+        }
+
+        .error {
+            color: red;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        /* Görünmez mesaj */
+        #userNotFoundMessage {
+            display: none;
+            color: red;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        /* Butonun üzerine gelindiğinde değişen stil */
+        submit:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Login</h1>
+
+        <!-- Görünmez kullanıcı bulunamadı mesajı -->
+        <div id="userNotFoundMessage">Kullanıcı bulunamadı</div>
+        <!-- Hata mesajını göstermek için bir div -->
+        <div id="errorMessage" class="error">{{ error }}</div>
+
+        <!-- Giriş formu -->
+        <form action="/login" method="post">
+            <label for="mail">Mail</label>
+            <input type="mail" id="mail" name="mail" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+
+            <input type="submit" value="Log In">
+        </form>
+
+        <!-- Signup düğmesi -->
+        <a href="/signup" class="signup-button">Sign Up</a>
+    </div>
+</body>
+
+</html>
