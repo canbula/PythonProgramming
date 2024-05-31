@@ -1,0 +1,146 @@
+{% extends 'layout.html' %}
+
+{% load static %}
+
+{% block css_files %}
+  {{ block.super }}
+  <link rel="stylesheet" href="{% static 'block/css/style.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'css/sidebar.css' %}" />
+  <!-- Bootstrap CSS -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+{% endblock %}
+
+{% block title %}
+  Todo List
+{% endblock %}
+
+{% block content %}
+  <style>
+    /* Görev listesi öğeleri */
+    .list-group-item {
+      display: flex;
+      align-items: center;
+    }
+    
+    /* Checkbox stilleri */
+    .list-group-item input[type='checkbox'] {
+      margin-right: 10px;
+    }
+    
+    /* Tamamlanmış görev stillemesi */
+    .completed {
+      text-decoration: line-through;
+      color: #6c757d; /* Gri renk */
+    }
+  </style>
+
+  <div class="row">
+    <div class="col-2">
+      {% include 'includes/sidebar.html' %}
+    </div>
+    <div class="col-10">
+      <div class="container mt-5">
+        <div class="row justify-content-center">
+          <div class="col-md-8">
+            <div class="card">
+              <div class="card-body">
+                <h2 class="card-title text-center mb-4">To-Do List</h2>
+                <form action="{% url 'todo' %}" method="post">
+                  {% csrf_token %}
+                  <div class="form-group">
+                    <input type="text" name="product_name" class="form-control" id="todo-input" required placeholder="To-do" />
+                  </div>
+                  <button type="submit" class="btn btn-success btn-block">Add</button>
+                </form>
+
+                <!-- Django view'ından gelen alışveriş öğelerini döngü ile ekleyin -->
+                {% for shop in shops %}
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ shop.product_name }}
+                    <div class="btn-group" role="group" aria-label="Edit Delete">
+                      <button class="btn btn-success btn-sm rounded-pill ml-2" onclick="markAsDone(this)"><i class="fas fa-check"></i></button>
+
+                      <form action="{% url 'delete_shop' shop.id %}" method="post">
+                        {% csrf_token %}
+                        <button class="btn btn-danger btn-sm rounded-pill ml-2"><i class="fas fa-trash"></i></button>
+                      </form>
+                    </div>
+                  </li>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const todoForm = document.getElementById('todo-form') // Görev ekleme formunu seç
+      const todoInput = document.getElementById('todo-input') // Görev giriş alanını seç
+      const todoList = document.getElementById('todo-list') // Görev listesini seç
+    
+      // Görev ekleme formunu dinle
+      todoForm.addEventListener('submit', function (event) {
+        event.preventDefault() // Sayfanın yeniden yüklenmesini önle
+    
+        const todoText = todoInput.value.trim() // Girilen görev metnini al, baştaki ve sondaki boşlukları temizle
+    
+        if (todoText !== '') {
+          // Boş bir görev eklenmesini önle
+          // Yeni bir liste öğesi (li elementi) oluştur
+          const todoItem = document.createElement('li')
+          todoItem.classList.add('list-group-item')
+    
+          // Checkbox oluştur
+          const checkbox = document.createElement('input')
+          checkbox.type = 'checkbox'
+          checkbox.classList.add('mr-2')
+    
+          // Görev metnini içeren span oluştur
+          const span = document.createElement('span')
+          span.innerText = todoText
+    
+          // Checkbox ve metni liste öğesine ekle
+          todoItem.appendChild(checkbox)
+          todoItem.appendChild(span)
+    
+          // Liste öğesini görev listesine ekle
+          todoList.appendChild(todoItem)
+    
+          // Görev eklendikten sonra giriş alanını temizle
+          todoInput.value = ''
+        } else {
+          // Modalı aç ve bildirimi göster
+          const alertModal = document.getElementById('alertModal')
+          const alertMessage = document.getElementById('alertMessage')
+          alertMessage.innerText = 'Lütfen bir görev girin!'
+          $(alertModal).modal('show') // jQuery kullanarak modalı aç
+        }
+      })
+    
+      // Görev listesini dinle ve tıklanan öğeyi kaldır veya tamamlandı işareti ekle
+      todoList.addEventListener('click', function (event) {
+        if (event.target.tagName.toLowerCase() === 'input' && event.target.type === 'checkbox') {
+          const checkbox = event.target
+          const todoItem = checkbox.parentElement
+    
+          if (checkbox.checked) {
+            todoItem.classList.add('completed') // Tamamlanan görev stilini uygula
+          } else {
+            todoItem.classList.remove('completed') // Tamamlanan görev stilini kaldır
+          }
+        } else if (event.target.tagName.toLowerCase() === 'li') {
+          event.target.remove() // Li öğesini kaldır
+        }
+      })
+    })
+  </script>
+  <script>
+    function markAsDone(button) {
+      button.parentNode.parentNode.style.textDecoration = 'line-through' // Üstü çizili yap
+      button.parentNode.parentNode.style.order = '1' // En alta git
+    }
+  </script>
+{% endblock %}
