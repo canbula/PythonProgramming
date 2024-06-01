@@ -1,0 +1,62 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    {%block title%} {%endblock%}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <link rel="stylesheet" href="{%static 'css/bootstrap.css'%}">
+    <link rel="stylesheet" href="{%static 'css/selam.css'%}">
+    
+    {% block css_files%} {% endblock %}
+    <title>Draied</title>
+</head>
+<body>
+    {% include "partials/navbar.html"%}
+    <div class="container-fluid">
+        
+        <div class="row">
+            <!-- Sidebar -->
+            {% include "partials/sidebar.html" %}
+            
+            <div id="mainContentArea" class="col-md-10 text-light main">
+                
+                {%block content%}
+                
+                
+                
+                {%endblock%}
+                <!-- Search Modal -->
+
+                <div class="modal fade" id="searchModal" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true" >
+                    <div class="modal-dialog" >
+                        <div class="modal-content">
+                            <div class="modal-header" style="background: #212120"> 
+                                <h5 class="modal-title" id="searchModalLabel" style="background: #212120; color: #ffffff" >Search Notes</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background: #212120"></button>
+                            </div>
+                            <div class="modal-body" style="background: #212120">
+                                <form id="search-form" method="GET" action="{% url 'search_notes' %}">
+                                    <div class="form-group">
+                                        <input style="background: #212120; color: #ffffff" type="text" name="q" id="search-input" class="form-control" placeholder="Search notes...">
+                                    </div>
+                                </form>
+                                <div id="search-results" class="mt-3"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    
+
+    <script src="{%static 'js/bootstrap.js'%}"></script>
+    <script src="{%static 'js/script.js'%}"></script>
+    <script src="{% static 'js/search.js' %}"></script>
+    {%block js_files%}  {%endblock%}
+
+</body>
+</html>

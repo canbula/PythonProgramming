@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="container" style="padding: 20px; max-width: 800px; margin: 0 auto; text-align: center;">
+    <h1>Welcome to Your Notes Application</h1>
+    <p style="margin-top: 20px; font-size: 1.2em;">
+      This is your personal space to create, store, and manage all your notes securely and efficiently. Get started by adding your first note or explore the notes you have already created.
+    </p>
+    <div class="home-actions" style="margin-top: 30px;">
+      <a href="{% url 'note_list' %}" style="margin-right: 20px; text-decoration: none; color: #007bff; font-size: 1.2em;">View Your Notes</a>
+      <a href="{% url 'add_note' %}" style="text-decoration: none; color: #007bff; font-size: 1.2em;">Add New Note</a>
+    </div>
+  </div>
+{% endblock %}
