@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+
+<head>
+    <style>
+ /* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #abcdef;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #dfe2ec;
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    height: 80px;
+    font-size: 1.3rem;
+}
+
+.logo img {
+    height: 100px;
+    width: 100px;
+    display: flex;
+    align-items: right;
+    text-align: right;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: #333;
+    margin-right: 20px;
+    transition: color 0.3s ease;
+}
+
+.navbar a:hover {
+    color: #007bff;
+}
+
+.buttons button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    margin-left: 10px;
+    transition: color 0.3s ease;
+}
+
+.buttons button:hover {
+    color: #007bff;
+}
+
+/* Home Section Styles */
+.home {
+    padding: 20px;
+}
+
+.content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.note-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.note-item {
+    flex: 1 1 calc(50% - 20px);
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin: 10px 0;
+}
+
+.note {
+    padding: 15px;
+}
+
+.note p {
+    margin: 0;
+    padding-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.delete-form {
+    padding: 15px;
+    text-align: center;
+}
+
+.btn {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #c82333;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .note-item {
+        flex: 1 1 100%;
+    }
+}
+</style>
+</head>
+
+<body>
+    <!--header section start-->
+    <header class ="header">
+        <a href = "#" class="logo">
+            <img src="{%static 'images/noteis.png' %}" alt="image"  />
+        </a>
+        <nav class="navbar">
+            <a href="{% url 'home'%}" class="active">Homepage</a>
+            <a href="{% url 'todo_list'%}">Todo List</a>
+            <a href="{% url 'calendar'%}">Calendar</a>
+            <a href="{% url 'reading_list'%}">Reading List</a>
+            <a href="{% url 'quick_notes'%}">Quick Notes</a>
+            <a href="{% url 'login'%}">Log out</a>
+        </nav>
+        <div class="buttons">
+            <button>
+                <i class="fas fa-search"></i>
+            </button>
+            <button>
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+    <!--! header section end -->
+
+    <!--! home section start -->
+    <section class="home">
+        <div class="content">
+            <ul id="noteList" class="note-list">
+                {% for key, value in data.items %}
+                <li class="note-item">
+                    <div class="note">
+                        <h3>{{ value.baslik }}</h3>
+                        <p>{{ value.icerik }}</p>
+                    </div>
+                    <form method="post" action="{% url 'delete_note' key %}" class="delete-form">
+                        {% csrf_token %}
+                        <button class="btn" type="submit">delete</button>
+                    </form>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+
+
+</body>
+
+</html>
