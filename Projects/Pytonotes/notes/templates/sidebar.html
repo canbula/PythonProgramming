@@ -1,0 +1,57 @@
+{% load static %}
+{% csrf_token %}
+<nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+    <div class="sidebar-sticky">
+        <div class="workspace-header dropdown">
+            <i class="fa-solid fa-w workspace-icon mt-1"></i>
+            {{ top_workspace_text }}
+            <i class="fas fa-chevron-down text-secondary dropdown-toggle" data-toggle="dropdown"></i>
+            <div class="dropdown-menu workspace-dropdown">
+                <div class="dropdown-header d-flex justify-content-between align-items-center">
+                    <strong class="email-text">{{ request.user.email }}</strong>
+                    <button id="add-workspace-btn" class="btn btn-sm btn-outline-secondary ml-2">+</button>
+                </div>
+                {% for workspace in workspaces %}
+                    <a class="dropdown-item d-flex align-items-center" href="?workspace_id={{ workspace.id }}">
+                        <div class="workspace-info d-flex align-items-center">
+                            <i class="{{ workspace.icon }} workspace-icon-small"></i>
+                            <div>
+                                <div>{{ workspace.name }}</div>
+                                <small class="text-muted">{{ workspace.members.count }} member{% if workspace.members.count != 1 %}s{% endif %}</small>
+                            </div>
+                        </div>
+                        {% if workspace == current_workspace %}
+                            <i class="fas fa-check text-dark ml-auto"></i>
+                        {% endif %}
+                    </a>
+                {% endfor %}
+                <div class="dropdown-divider"></div>
+                <div class="dropdown-downside">
+                    <a class="dropdown-item default" href="#">Add another account</a>
+                    <a class="dropdown-item default" href="{% url 'logout' %}">Log out</a>
+                </div>
+            </div>
+        </div>
+        <div class="private-section mt-2">
+            <button class="btn btn-link private-toggle" id="private-toggle">
+                <strong>Private</strong>
+            </button>
+            <ul class="list-unstyled private-pages" id="private-pages" style="display: block;">
+                {% for page in pages %}
+                <li class="nav-item d-flex align-items-center justify-content-between mt-1">
+                    <a href="javascript:void(0);" class="nav-link d-flex align-items-center {% if page == current_page %}active{% endif %}" onclick="loadPage({{ page.id }})" data-page-id="{{ page.id }}">
+                        <i class="{{ page.icon }} page-icon"></i>
+                        <span class="page-title" id="page-title-{{ page.id }}">{{ page.title }}</span>
+                    </a>
+                    <i class="fas fa-ellipsis-h ellipsis-icon" data-page-id="{{ page.id }}"></i>
+                    <div class="page-dropdown-menu" data-page-id="{{ page.id }}">
+                        <a class="dropdown-item" href="#" data-action="copy-link" data-page-id="{{ page.id }}">Copy link</a>
+                        <a class="dropdown-item" href="#" data-action="duplicate" data-page-id="{{ page.id }}">Duplicate</a>
+                        <a class="dropdown-item" href="#" data-action="delete" data-page-id="{{ page.id }}">Delete</a>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</nav>
