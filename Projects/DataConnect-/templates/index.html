@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQLite Database Browser</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            display: flex;
+            height: 100vh;
+        }
+        .sidebar {
+            width: 250px;
+            background: #333;
+            color: white;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .sidebar h1 {
+            text-align: center;
+        }
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .sidebar li {
+            padding: 10px;
+            background: #444;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+        .sidebar li a {
+            color: white;
+            text-decoration: none;
+        }
+        .sidebar li:hover {
+            background: #555;
+        }
+        .content {
+            flex: 1;
+            padding: 20px;
+        }
+        .flash-error {
+            color: red;
+            margin-bottom: 10px;
+        }
+        .flash-success {
+            color: green;
+            margin-bottom: 10px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background: #0056b3;
+        }
+        .btn-danger {
+            background: #dc3545;
+        }
+        .btn-danger:hover {
+            background: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h1>SQLite Database Browser</h1>
+        <h2>Existing Tables</h2>
+        <ul>
+            {% for table in tables %}
+                <li>
+                    <a href="{{ url_for('select_table', table_name=table) }}">{{ table }}</a>
+                    <form action="{{ url_for('delete_table', table_name=table) }}" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+        <a href="{{ url_for('create_table') }}" class="btn">Create Table</a>
+        <a href="{{ url_for('query') }}" class="btn">Query</a>
+    </div>
+    <div class="content">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <h1>Welcome to the SQLite Database Browser</h1>
+        <p>Select a table from the sidebar to view and manage its data.</p>
+    </div>
+</body>
+</html>
