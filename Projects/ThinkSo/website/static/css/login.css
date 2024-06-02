@@ -1,0 +1,45 @@
+body {
+    background-color: rgb(104, 159, 204);
+    /* Yükseklik ayarlaması yapmayın, body genellikle otomatik olarak içeriğin yüksekliğine ayarlanır */
+}
+
+.navbar-brand {
+    /* Buraya istediğiniz stil özelliklerini ekleyin */
+    font-size: 24px;
+    font-family: 'Montserrat', sans-serif;
+    color: #333; /* veya istediğiniz renk */
+    text-decoration: none; /* Link altı çizgisini kaldırır */
+    margin-right: 180px;
+    position: fixed; /* Logo'yu sabit konumda tut */
+    top: 20px; /* Sayfanın üst kısmından 20px uzaklıkta */
+    left: 25px;
+}
+
+form {
+    width: 400px; /* Formun genişliğini ayarlayın */
+    margin: auto;
+    padding: 20px; /* Formun içerisindeki içeriği düzenlemek için padding kullanın */
+    margin-top: 100px; /* Formun üstten boşluğunu ayarlayın */
+    background-color: rgb(175, 213, 223);
+    border-radius: 10px; /* Kenar yuvarlatma ekleyin */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Kutuya hafif bir gölge ekleyin */
+}
+
+.bg {
+    background-color: rgb(175, 213, 223);
+}
+
+.btn-color {
+    /* Buton rengiyle ilgili bir stil belirtilmemiş, gerekli değilse bu kısmı silebilirsiniz */
+    background-color: #0d68b8; /* Buton rengini değiştirin */
+    color: white; /* Buton metin rengini beyaz yapın */
+    margin-top: 20px; /* Butonun üstten boşluğunu ayarlayın */
+}
+
+.warning-message {
+    color: rgb(131, 131, 131);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    margin-top: 4px;
+    margin-bottom: 2px;
+}

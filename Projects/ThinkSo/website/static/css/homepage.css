@@ -1,0 +1,47 @@
+.container {
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    font-size: 80px; /* İstediğiniz boyuta göre ayarlayabilirsiniz */
+}
+
+h2 {
+    font-size: 20px; /* İstediğiniz boyuta göre ayarlayabilirsiniz */
+   
+}
+
+.nav-link2 {
+  text-decoration: none;
+}
+
+.button {
+    text-align: center; /* Butonları merkezlemek için */
+    margin-top: 20px;
+  }
+
+  .button a {
+    display: inline-block; /* Butonların yatay olarak yan yana olması için */
+    margin: 0 5px; /* İstenilen aralık için */
+  }
+
+  .carousel-item img {
+    object-fit: cover; 
+  }
+
+  footer h4, footer p, footer ul li a {
+    color: black; /* Metin ve bağlantı rengini siyah yapar */
+    text-decoration: none; 
+}
+
+footer ul {
+  padding-left: 0; /* Soldan boşlukları kaldırır */
+}
+
+footer ul li a:hover {
+  color: #acabab; /* Hover durumunda farklı bir renk uygulamak için (isteğe bağlı) */
+  text-decoration: none; /* Hover durumunda alt çizgiyi kaldırır */
+}
