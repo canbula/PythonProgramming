@@ -1,0 +1,239 @@
+{% extends "notion_app/base.html" %}
+
+{% block content %}
+    <div class="main-content">
+        <div class="page-header" contenteditable="true">
+            <span class="placeholder">Untitled</span>
+        </div>
+        <div class="add-button" onclick="toggleBlockMenu()">
+            <i class="fas fa-plus"></i>
+        </div>
+        <div class="block-menu" id="block-menu">
+            <div class="block-item" onclick="addContentBlock('text')">
+                <i class="fas fa-font"></i>
+                <div>
+                    <strong>Text</strong>
+                    <div class="item-description">Just start writing with plain text.</div>
+                </div>
+            </div>
+            <div class="block-item" onclick="addContentBlock('page')">
+                <i class="fas fa-file"></i>
+                <div>
+                    <strong>Page</strong>
+                    <div class="item-description">Embed a sub-page inside this page.</div>
+                </div>
+            </div>
+            <div class="block-item" onclick="addContentBlock('todo')">
+                <i class="fas fa-list"></i>
+                <div>
+                    <strong>To-do list</strong>
+                    <div class="item-description">Track tasks with a to-do list.</div>
+                </div>
+            </div>
+            <div class="block-item" onclick="addContentBlock('h1')">
+                <i class="fas fa-heading"></i>
+                <div>
+                    <strong>Heading 1</strong>
+                    <div class="item-description">Big section heading.</div>
+                </div>
+            </div>
+            <div class="block-item" onclick="addContentBlock('h2')">
+                <i class="fas fa-heading"></i>
+                <div>
+                    <strong>Heading 2</strong>
+                    <div class="item-description">Medium section heading.</div>
+                </div>
+            </div>
+        </div>
+        <div class="content" id="content">
+            <!-- Dynamic content blocks will be added here -->
+        </div>
+    </div>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 10px 20px;
+        }
+
+        .main-content {
+            padding: 20px;
+            padding-top: 40px;
+            position: relative;
+            max-width: 800px; /* Adding max-width for better centering */
+            margin: auto; /* Centering the main content */
+        }
+
+        .page-header {
+            font-size: 2.5em; /* Increased font size for the header */
+            margin-bottom: 10px; /* Reduced margin-bottom */
+            text-align: left; /* Aligning the header to the left */
+        }
+
+        .placeholder {
+            color: #ccc;
+        }
+
+        .block-menu {
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            position: absolute;
+            top: 80px; /* Adjusted top position to align with new button position */
+            left: 20%;
+            transform: translateX(-50%);
+            background-color: #fff;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+        }
+
+        .block-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: #fff;
+            cursor: pointer;
+            border-radius: 5px;
+            border: none; /* Removed border */
+            outline: none; /* Removed outline */
+        }
+
+        .block-item i {
+            margin-right: 10px;
+            font-size: 1.5em;
+        }
+
+        .block-item div {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .item-description {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .block-item:hover {
+            background-color: #e0e0e0;
+        }
+
+        .content {
+            margin-top: 20px;
+            text-align: left; /* Changed to left align for content */
+        }
+
+        .content-block {
+            padding: 10px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .add-button {
+            background-color: transparent;
+            color: #000;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: 14px;
+            opacity: 0.3; /* Increased transparency for a faded look */
+            margin-bottom: 20px; /* Added margin-bottom to space from content */
+            margin-left: 0; /* Align to the left */
+        }
+
+        .add-button:hover {
+            opacity: 0.6; /* Slightly less transparent on hover */
+        }
+
+        .add-button i {
+            font-size: 14px;
+        }
+
+        .delete-button {
+            cursor: pointer;
+            color: red;
+            margin-left: 10px;
+        }
+    </style>
+
+    <script>
+        function addContentBlock(type) {
+            const content = document.getElementById('content');
+            let block;
+            switch(type) {
+                case 'text':
+                    block = document.createElement('div');
+                    block.contentEditable = true;
+                    block.className = 'content-block';
+                    block.innerText = 'New Text';
+                    break;
+                case 'page':
+                    block = document.createElement('div');
+                    block.className = 'content-block';
+                    block.innerHTML = '<strong>New Page:</strong> <a href="#">Open</a>';
+                    break;
+                case 'todo':
+                    block = document.createElement('div');
+                    block.className = 'content-block';
+                    block.innerHTML = '<input type="checkbox"> <span contentEditable="true">New To-do</span>';
+                    break;
+                case 'h1':
+                    block = document.createElement('h1');
+                    block.className = 'content-block';
+                    block.contentEditable = true;
+                    block.innerText = 'New Heading 1';
+                    break;
+                case 'h2':
+                    block = document.createElement('h2');
+                    block.className = 'content-block';
+                    block.contentEditable = true;
+                    block.innerText = 'New Heading 2';
+                    break;
+                default:
+                    break;
+            }
+
+            const deleteBtn = document.createElement('span');
+            deleteBtn.className = 'delete-button';
+            deleteBtn.innerHTML = '&times;';
+            deleteBtn.onclick = function() {
+                block.remove();
+            };
+            block.appendChild(deleteBtn);
+
+            content.appendChild(block);
+            toggleBlockMenu();  // Close the block menu after adding a block
+        }
+
+        function toggleBlockMenu() {
+            const blockMenu = document.getElementById('block-menu');
+            blockMenu.style.display = blockMenu.style.display === 'none' ? 'flex' : 'none';
+        }
+
+        document.addEventListener('click', function(event) {
+            const blockMenu = document.getElementById('block-menu');
+            const addBtn = document.querySelector('.add-button');
+
+            const isClickedInsideBlockMenu = blockMenu.contains(event.target);
+            const isClickedOnAddBtn = addBtn.contains(event.target);
+
+            if (!isClickedInsideBlockMenu && !isClickedOnAddBtn) {
+                blockMenu.style.display = 'none';
+            }
+        });
+    </script>
+{% endblock content %}
