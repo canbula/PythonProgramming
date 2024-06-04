@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ThinkSo | Blog</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/blog.css') }}">
+
+  <style>
+    
+    .navbar-custom {
+      background-color: rgb(104, 159, 204); /* Arka plan rengi */
+    }
+    .navbar-custom .navbar-brand {
+      color: white; /* Marka yazı rengi */
+    }
+  
+  </style>
+
+</head>
+
+<body>
+<!-- Navbar -->
+<nav class="navbar navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="..\js\homepage.html">
+      Thinkso
+    </a>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 mb-3 mt-3">
+      <div class="card" style="width: 20rem;">
+        <img src="{{ url_for('static',filename='img/050424_heart_feat.jpg') }}" class="card-img-top" alt="heart">
+        <div class="card-body">
+          <h5 class="card-title">Topic 1</h5>
+          <p class="card-text"><h4>The heart plays a hidden role in our mental health</h4>
+            There are hints that the heart can influence intuitions, decision making and emotions. People who were better able to feel their hearts' rhythms reacted more intensely to emotional images than people who were worse at sensing their ...
+          </p>
+          <a href="https://www.sciencenews.org/article/heart-brain-mental-health" class="btn btn-primary">Visit the page</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 mb-3 mt-3">
+      <div class="card" style="width: 20rem;">
+        <img src="{{ url_for('static',filename='img/first-warm-blooded-din.jpg') }}" class="card-img-top" alt="first-warm-blooded-din">
+        <div class="card-body">
+          <h5 class="card-title">Topic 2</h5>
+          <p class="card-text"><h4>First 'warm-blooded' dinosaurs may have emerged 180 million years ago</h4>The ability to regulate body temperature, a trait all mammals and birds have today, may have evolved among some dinosaurs early in the ...</p>
+          <a href="https://phys.org/news/2024-05-blooded-dinosaurs-emerged-million-years.html#google_vignette" class="btn btn-primary">Visit the page</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 mb-3 mt-3">
+      <div class="card" style="width: 20rem;">
+        <img src="{{ url_for('static',filename='img/speculoos-3_final_nasa_jpl_caltech.jpg') }}" class="card-img-top" alt="speculoos">
+        <div class="card-body">
+          <h5 class="card-title">Topic 3</h5>
+          <p class="card-text"><h4>Detection of an Earth-Sized Exoplanet Orbiting the Ultracool Dwarf Star SPECULOOS-3</h4>The SPECULOOS project, led by the astronomer Michaël Gillon from the University of Liège, has just discovered a new Earth-sized exoplanet around...</p>
+          <a href="https://www.sciencedaily.com/releases/2024/05/240515122831.htm" class="btn btn-primary">Visit the page</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+  
