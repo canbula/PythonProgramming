@@ -1,0 +1,40 @@
+
+{%load static%}
+<div id="sidebar" class="col-md-3 border-left sidebar" style="height: 100vh; /* Set sidebar height to 100% of the viewport height */
+display: flex; /* Use flexbox */
+flex-direction: column; /* Arrange items vertically */
+transition: width 0.3s;
+background: #212120;
+color: #979796;">
+                
+    <!-- Categories in the sidebar -->
+    <div class="content">
+        <div class="row">
+            <img src="{% static 'img/user.png' %}" alt="bumbocluck" style="width: 50px; height: auto;">
+        </div>   
+
+        <!-- Category 1: First Category -->
+        <div class="row">
+            <div class="col">
+                <ul class="list-group list-group-flush">
+                    {% if user.is_authenticated %}
+                        <li class="list-group-item"><a href="#" id="openModalBtn" data-bs-toggle="modal" data-bs-target="#searchModal" class="link-secondary link-offset-2 link-underline-opacity-0 link-underline-opacity-0-hover">Search</a></li>
+                    {% endif %}
+                    <li class="list-group-item"><a href="{% url 'note_list' %}" class="link-secondary link-offset-2 link-underline-opacity-0 link-underline-opacity-0-hover">My Notes</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        
+        <!-- Category 3: Third Category -->
+        <div class="row" style="position: absolute; bottom: 20px;">
+            <div class="col">
+                
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><a href="#" class="link-secondary link-offset-2 link-underline-opacity-0 link-underline-opacity-0-hover">Calendar</a></li>
+                    <li class="list-group-item"><a href="#" class="link-secondary link-offset-2 link-underline-opacity-0 link-underline-opacity-0-hover">Trash</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

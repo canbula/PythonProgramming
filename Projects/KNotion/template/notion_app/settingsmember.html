@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Members</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            display: flex;
+        }
+
+        .sidebar {
+            width: 200px;
+            background-color: #fff;
+            border-right: 1px solid #ccc;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .account-info {
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .account-details h3 {
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .account-details p {
+            margin: 0;
+            font-size: 12px;
+            color: #666;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav ul li {
+            padding: 10px 20px;
+            cursor: pointer;
+            color: #333;
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul li.active, nav ul li:hover {
+            font-weight: bold;
+        }
+
+        nav ul li i {
+            margin-right: 10px;
+        }
+
+        .sidebar-bottom {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            text-align: center;
+        }
+
+        .main-content {
+            flex-grow: 1;
+            padding: 20px;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+<div class="container">
+    <aside class="sidebar">
+        <div>
+            <div class="account-info">
+                <div class="account-details">
+                    <h3>user's name</h3>
+                    <p>user's email</p>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li data-section="account" class="active"><i class="fas fa-user"></i>My account</li>
+                    <li data-section="settings"><i class="fas fa-cog"></i>My settings</li>
+                    <li data-section="notifications"><i class="fas fa-bell"></i>My notifications</li>
+                    <li data-section="connections"><i class="fas fa-link"></i>My connections</li>
+                    <li data-section="language"><i class="fas fa-language"></i>Language</li>
+                </ul>
+            </nav>
+        </div>
+        <div class="sidebar-bottom">
+            Footer content here
+        </div>
+    </aside>
+    <main class="main-content">
+        <div id="account" class="section active">
+            <h1>My account</h1>
+            <p>Account details go here.</p>
+        </div>
+        <div id="settings" class="section">
+            <h1>My settings</h1>
+            <p>Settings details go here.</p>
+        </div>
+        <div id="notifications" class="section">
+            <h1>My notifications</h1>
+            <p>Notifications details go here.</p>
+        </div>
+        <div id="connections" class="section">
+            <h1>My connections</h1>
+            <p>Connections details go here.</p>
+        </div>
+        <div id="language" class="section">
+            <h1>Language</h1>
+            <p>Language settings go here.</p>
+        </div>
+    </main>
+</div>
+<script>
+    document.querySelectorAll('.sidebar nav ul li').forEach(item => {
+        item.addEventListener('click', event => {
+            document.querySelectorAll('.sidebar nav ul li').forEach(li => li.classList.remove('active'));
+            item.classList.add('active');
+
+            const sectionId = item.getAttribute('data-section');
+            document.querySelectorAll('.section').forEach(section => section.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+        });
+    });
+</script>
+</body>
+</html>

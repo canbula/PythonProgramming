@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="header">
+        <h1>Welcome {{ current_user.username }}!</h1>
+    </div>
+    <ul>
+        {% for page in pages %}
+            <li>
+                <div class="list-item">
+                    <div class="list-item-title">
+                        <a href="{{ url_for('page', page_id=page.id) }}">{{ page.title }}</a>
+                    </div>
+                    <div class="button-group">
+                        <form action="{{ url_for('delete', page_id=page.id) }}" method="POST" style="display:inline;">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                            <button type="submit" class="delete-button">Delete</button>
+                        </form>
+                        <a href="{{ url_for('edit_page', page_id=page.id) }}" class="edit-button">Edit</a>
+                    </div>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+    <h2>Your Events</h2>
+    <ul>
+        {% for event in events %}
+            <li>{{ event.title }} - {{ event.start_date }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -1,0 +1,262 @@
+{% extends "notion_app/template.html" %}
+
+{% block content %}
+    
+<style>
+    .calendar-container {
+        padding-top: 20px;
+        width: 18000px; /* Genişliği artırmak için */
+        height: 800px; /* Yüksekliği artırmak için */
+        margin: 0 auto;
+        text-align: left;
+        margin-left: 300px; /* Ortalamak için */
+    }
+    
+    #calendar {
+        width: 100%;
+        height: 100%;
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(25, 188, 61, 0);
+    }
+
+    .modal-content {
+        background-color: #5cb85c;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #cccccc;
+        width: 80%;
+    }
+
+    .close {
+        color: #999999;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #000000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .add-event-button {
+        position: fixed;
+        right: 50px;
+        top: 50px;
+        background-color: #5cb85c;
+        color: white;
+        border: none;
+        padding: 15px 25px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    .add-event-button:hover {
+        background-color: #4cae4c;
+    }
+
+    .add-event-form {
+        display: none;
+        position: fixed;
+        z-index: 18000;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        padding: 20px;
+        border: 1px solid #cccccc;
+        border-radius: 10px;
+    }
+
+    .add-event-form input,
+    .add-event-form textarea,
+    .add-event-form select {
+        width: calc(100% - 22px);
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+    .add-event-form button {
+        padding: 10px 20px;
+        background-color: #5cb85c;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+    .add-event-form button:hover {
+        background-color: #4cae4c;
+    }
+
+    .add-event-close {
+        color: #999999;
+        float: right;
+        font-size: 20px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .add-event-close:hover {
+        color: #000000;
+    }
+
+    /* Yeni CSS Sınıfları */
+    .fc-event-red {
+        background-color: rgba(220, 53, 69, 0.3) !important;
+        border: 2px solid rgba(220, 53, 69, 0.8) !important;
+    }
+
+    .fc-event-orange {
+        background-color: rgba(255, 193, 7, 0.3) !important;
+        border: 2px solid rgba(255, 193, 7, 0.8) !important;
+    }
+
+    .fc-event-green {
+        background-color: rgba(40, 167, 69, 0.3) !important;
+        border: 2px solid rgba(40, 167, 69, 0.8) !important;
+    }
+
+    .fc-toolbar-chunk button {
+        background-color: #5cb85c !important;
+        border-color: #5cb85c !important;
+        color: white !important;
+    }
+
+    .fc-toolbar-chunk button:hover {
+        background-color: #4cae4c !important;
+        border-color: #4cae4c !important;
+    }
+
+    .fc-toolbar-chunk button:focus {
+        box-shadow: 0 0 0 0.2rem rgba(92, 184, 92, 0.5) !important;
+    }
+
+    .fc-button-group .fc-button {
+        margin-right: 5px;
+    }
+</style>
+
+<div class="calendar-container">
+    <div id="calendar"></div>
+</div>
+
+<!-- Add Event Button -->
+<button class="add-event-button" onclick="toggleAddEventForm()">Plan Ekle</button>
+
+<!-- Add Event Form -->
+<div class="add-event-form" id="addEventForm">
+    <span class="add-event-close" onclick="toggleAddEventForm()">&times;</span>
+    <h2>Yeni Etkinlik Ekle</h2>
+    <input type="text" id="eventTitleInput" placeholder="Etkinlik Başlığı">
+    <input type="date" id="eventDateInput">
+    <input type="time" id="eventTimeInput">
+    <textarea id="eventDetailsInput" placeholder="Etkinlik Detayları"></textarea>
+    <select id="eventPriorityInput">
+        <option value="red">En Acil</option>
+        <option value="orange">Orta</option>
+        <option value="green">Hiç Acelesi Yok</option>
+    </select>
+    <button onclick="addEvent()">Ekle</button>
+    <button onclick="toggleAddEventForm()">İptal</button>
+</div>
+
+<!-- Modal -->
+<div id="eventModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2 id="eventTitle"></h2>
+        <p id="eventDetails"></p>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var modal = document.getElementById("eventModal");
+        var span = document.getElementsByClassName("close")[0];
+        
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            headerToolbar: {
+                left: 'prev,next',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            },
+            events: [
+                {
+                    // Buraya varsayılan etkinlikler eklenebilir
+                }
+            ],
+            eventClick: function(info) {
+                document.getElementById('eventTitle').innerText = info.event.title;
+                document.getElementById('eventDetails').innerText = info.event.extendedProps.details;
+                modal.style.display = "block";
+            }
+        });
+        calendar.render();
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        window.addEvent = function() {
+            var title = document.getElementById('eventTitleInput').value;
+            var date = document.getElementById('eventDateInput').value;
+            var time = document.getElementById('eventTimeInput').value;
+            var details = document.getElementById('eventDetailsInput').value;
+            var priority = document.getElementById('eventPriorityInput').value;
+
+            if (title && date && time) {
+                var datetime = date + 'T' + time;
+                var className = 'fc-event-' + priority;
+                calendar.addEvent({
+                    title: title,
+                    start: datetime,
+                    details: details,
+                    classNames: [className]
+                });
+
+                // Formu temizle
+                document.getElementById('eventTitleInput').value = '';
+                document.getElementById('eventDateInput').value = '';
+                document.getElementById('eventTimeInput').value = '';
+                document.getElementById('eventDetailsInput').value = '';
+                document.getElementById('eventPriorityInput').value = 'red';
+
+                // Formu kapat
+                toggleAddEventForm();
+            } else {
+                alert('Lütfen etkinlik başlığı, tarih ve saatini giriniz.');
+            }
+        }
+
+        window.toggleAddEventForm = function() {
+            var form = document.getElementById('addEventForm');
+            form.style.display = form.style.display === 'none' || form.style.display === '' ? 'block' : 'none';
+        }
+    });
+</script>
+{% endblock %}

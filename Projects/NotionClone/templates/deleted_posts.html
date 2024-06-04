@@ -1,0 +1,54 @@
+{% extends 'layout.html' %}
+
+{% load static %}
+
+{% block css_files %}
+    {{ block.super }} 
+    <link rel="stylesheet" href="{% static 'block/css/style.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/sidebar.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.2/main.min.css">
+    <style>
+        .undo-button {
+            float: left;
+            margin-right: 5px;
+            background-color: #28a745;
+            color: white;
+            padding: 4px 10px;
+            font-size: 14px;
+        }
+    </style>
+{% endblock  %}
+
+{% block title %}
+    Calendar
+{% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-2">
+        {% include 'includes/sidebar.html' %}
+    </div>
+
+    <div class="col-10">
+
+    
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Deleted Posts</h1>
+        <ul class="list-group">
+            {% for post in deleted_posts %}
+                <li class="list-group-item">
+                    <a href="{% url 'post_detail' post.id %}" style="font-weight: bold; color: black;">{{ post.title }}</a>
+                    <form method="post" action="{% url 'undo_delete_post' post.id %}" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-primary" style="float: right; margin-right: 5px; background-color: #28a745; color: white; padding: 4px 10px; font-size: 14px;"><i class="fas fa-undo"></i></button>
+                    </form>
+                </li>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+</div>
+{% endblock %}

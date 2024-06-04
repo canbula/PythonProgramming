@@ -1,0 +1,104 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap");
+
+:root {
+  --main-color: #c3f2fd;
+  --black-color: #000000;
+  --border: 0.1 rem solid rgba(255, 255, 255, 0.4);
+}
+
+* {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  text-transform:none;
+  transition: 0.2s ease;
+}
+
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
+  scroll-padding-top: 9rem;
+  scroll-behavior: smooth;
+}
+body {
+  background-color: var(--main-color);
+  height: 100vh;
+}
+.btn {
+  margin-top: 1rem;
+  display: inline-block;
+  padding: 2rem 3.75rem;
+  border-radius: 30rem;
+  font-size: 1.7rem;
+  color: white;
+  background-color: var(--black-color);
+  cursor: pointer;
+}
+section {
+  padding: 3.5rem 7%;
+}
+
+.header .logo img {
+  height: 10rem;
+}
+
+.header {
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 7%;
+  margin: 2rem 7%;
+  border-radius: 30rem;
+  box-shadow: 0xp 0xp 17xp -2xp rgba(0, 0, 0, 0.75);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+.header .navbar a {
+  margin: 0 1rem;
+  font-size: 1.6rem;
+  color: var(--black-color);
+  border-bottom: 0.1rem solid transparent;
+}
+.header .navbar .active,
+.header .navbar a:hover {
+  border-color: var(--main-color);
+  padding-bottom: 0.05rem;
+}
+.header .buttons button {
+  cursor: pointer;
+  font-size: 2.5rem;
+  margin-left: 2rem;
+  background-color: transparent;
+}
+.home {
+  min-height: 100vh;
+  background: url("../images/background.png") no-repeat;
+  background-size: cover;
+  background-position: center;
+  margin-top: -14.5rem;
+  display: flex;
+  align-items: center;
+}
+.home .content {
+  max-width: 60rem;
+  font-size: 2rem;
+}
+.home .content h3 {
+  font-size: 6rem;
+  color: #c3f2fd;
+  background-color: #c3f2fd;
+}
+.home .content p {
+  font-size: 2rem;
+  font-weight: 300;
+  line-height: 1.8;
+  padding: 1rem;
+  color: #c3f2fd;
+  background-color: #c3f2fd;
+}
