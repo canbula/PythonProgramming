@@ -1,0 +1,600 @@
+body {
+  border: 2px solid black;
+  width: auto;
+  height: auto;
+}
+.first {
+  margin-left: 25px !important;
+}
+.dropdown-toggle::after {
+  display: none;
+  /* Ok işaretini kaldırma */
+}
+
+.second {
+  margin-left: 5px !important;
+}
+
+.display {
+  display: inline-block;
+}
+
+.col .display:first-child {
+  margin-left: 35px;
+}
+
+.btn:focus {
+  outline: none;
+  border-color: transparent !important;
+}
+
+.pipe {
+  color: #8f8f8f;
+}
+
+@media (min-width: 1200px) {
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container-xl {
+    max-width: none;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+@media (min-width: 992px) {
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm {
+    max-width: none;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+@media (min-width: 768px) {
+  .container,
+  .container-md,
+  .container-sm {
+    max-width: none;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+@media (min-width: 576px) {
+  .container,
+  .container-sm {
+    max-width: none;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+} 
+
+.btn.disabled,
+.btn:disabled,
+fieldset:disabled .btn {
+  border-color: transparent !important;
+}
+
+.dropdown-menu li {
+  position: relative;
+}
+.dropdown-menu .dropdown-submenu {
+  display: none;
+  position: absolute;
+  left: 100%;
+  top: -7px;
+}
+.dropdown-menu .dropdown-submenu-left {
+  right: 100%;
+  left: auto;
+}
+.dropdown-menu > li:hover > .dropdown-submenu {
+  display: block;
+}
+
+.ddia {
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-item {
+  padding: 3px 7px 3px 10px;
+  cursor: pointer;
+}
+
+.ddia img {
+  margin-left: 5px;
+}
+
+#right-arrow {
+  transform: rotate(90deg);
+}
+.ddia i {
+  margin-left: 5px;
+  color: #4d92c7;
+  width: 16px !important;
+  height: 16px !important;
+}
+
+.fa-xs {
+  line-height: 1.3 !important;
+}
+
+/* .third {
+  width: calc(100% - 585px);
+  margin: 10px 300px 10px 300px;
+} */
+
+.fourth {
+  border: 2px solid red;
+  width: 100wh;
+  height: 700px;
+}
+
+.column1 {
+  height: 100vh;
+  width: 65vw;
+}
+
+/* .genisEkran {
+  height: 100%;
+} */
+
+.yarimEkran {
+  height: 465px;
+  display: flex;
+  flex-direction: column;
+}
+
+.butm {
+  margin: 2px 60px 2px 60px;
+}
+
+.topMenu {
+  display: flex;
+  height: 40px;
+}
+
+.sol {
+  margin-top: 5px;
+}
+.sol > button:nth-child(2) > i {
+  margin-left: 10px;
+}
+
+.sag {
+  margin-left: 250px;
+  margin-top: 12px;
+}
+.d {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.ortaMenu {
+  margin-bottom: 1px;
+  display: flex;
+}
+
+.ddl {
+  display: flex;
+  height: 50px;
+  margin-top: 20px;
+}
+
+.hidden {
+  display: none;
+}
+
+.cog {
+  margin-left: 50px;
+  margin-top: 22px;
+  height: 50px;
+}
+.cog > img {
+  height: 25px;
+}
+
+.i {
+  margin-left: 30px;
+  margin-top: 20px;
+  height: 50px;
+}
+.i > img {
+  margin-left: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  height: 25px;
+}
+
+.altMenu {
+  display: flex;
+  height: 270px;
+  margin-bottom: 1px;
+  width: 645px;
+}
+
+.enAltMenu {
+  display: flex;
+  flex-grow: 1;
+  height: 20px;
+  margin-bottom: 10px;
+  flex-direction: column;
+}
+
+.buttonApply {
+  margin-left: 190px;
+}
+
+.topMenu2 {
+  display: flex;
+  height: 40px;
+}
+
+.identity {
+  margin-bottom: 1px;
+  display: flex;
+}
+
+.btn.active {
+  background-color: orange; /* Seçili butonun arka plan rengi */
+  color: white; /* Seçili butonun metin rengi */
+}
+
+.btn-default {
+  background-color: grey; /* Diğer butonların arka plan rengi */
+  color: white; /* Diğer butonların metin rengi */
+}
+
+.dropMenu {
+  height: 270px;
+  margin: top -10px;
+}
+
+#large-area {
+  height: 815px;
+}
+#btn-group {
+  top: -25px;
+}
+
+.d-advanced {
+  margin: 3px auto !important;
+  width: 60% !important;
+}
+
+.tfac {
+  border: 2px solid black;
+}
+
+.tfac.active {
+  background-color: orange; /* Seçili butonun arka plan rengi */
+  color: white; /* Seçili butonun metin rengi */
+}
+
+.tfac-default {
+  background-color: grey; /* Diğer butonların arka plan rengi */
+  color: white; /* Diğer butonların metin rengi */
+}
+
+.tfac {
+  background-color: grey;
+  color: white;
+  cursor: pointer;
+}
+
+.drop-tfac {
+  border: 1px solid black;
+  top: -17px;
+  height: auto;
+  position: relative;
+  z-index: 2;
+}
+
+#addButton {
+  cursor: pointer;
+  margin-right: 15px;
+  border: 0.02em solid black;
+  margin-left: 10px;
+}
+
+#addButton > button {
+  left: -10px;
+  position: relative;
+}
+
+#removeButton {
+  cursor: pointer;
+  margin-right: 15px;
+  border: 0.02em solid black;
+  margin-left: 10px;
+}
+
+#removeButton > button {
+  left: -10px;
+  position: relative;
+}
+
+#moveTopButton {
+  cursor: pointer;
+  margin-right: 15px;
+  border: 0.02em solid black;
+  margin-left: 10px;
+}
+
+#moveTopButton > button {
+  left: -10px;
+  position: relative;
+}
+
+#moveBottomButton {
+  cursor: pointer;
+  margin-right: 15px;
+  border: 0.02em solid black;
+  margin-left: 10px;
+}
+
+#moveBottomButton > button {
+  left: -10px;
+  position: relative;
+}
+
+#moveUpButton {
+  cursor: pointer;
+  margin-right: 15px;
+  border: 0.02em solid black;
+  margin-left: 10px;
+}
+
+#moveUpButton > button {
+  left: -10px;
+  position: relative;
+}
+
+#moveDownButton {
+  cursor: pointer;
+  margin-right: 15px;
+  border: 0.02em solid black;
+  margin-left: 10px;
+}
+
+#moveDownButton > button {
+  left: -10px;
+  position: relative;
+}
+
+.tableButton {
+  margin-top: 25px;
+}
+
+.sql-field {
+  display: flex;
+}
+
+.sql-col {
+  display: grid;
+  width: 20px;
+  position: relative;
+  justify-content: center;
+}
+
+.sql-p {
+  position: relative;
+  top: -5px;
+  margin-block-start: 0px !important;
+  margin-block-end: 0px !important;
+}
+
+textarea {
+  resize: none;
+}
+
+.sql-form {
+  display: flex;
+  justify-content: flex-start;
+  width: 500px;
+  margin-left: 10px;
+}
+
+.sql-keyword {
+  color: rgb(66, 127, 219);
+}
+
+.table-name {
+  color: rgb(241, 0, 245);
+}
+
+.sql-fields {
+  color: rgb(241, 0, 245);
+  margin-top: 20px;
+}
+
+.sql-col-name {
+  width: 200px;
+  margin-top: 15px;
+}
+
+.sql-col-type {
+  width: 70px;
+  position: relative;
+  margin-top: 15px;
+}
+
+.sql-col-checkbox {
+  display: flex;
+  width: 60px;
+  position: relative;
+  left: 70px;
+  margin-top: 15px;
+}
+
+.sql-col-default {
+  position: relative;
+  display: flex;
+  width: 90px;
+  left: 50px;
+  margin-top: 15px;
+}
+
+.sql-col-check {
+  position: relative;
+  display: flex;
+  width: 100px;
+  left: 50px;
+  margin-top: 15px;
+}
+
+.sql-col-collation {
+  position: relative;
+  display: flex;
+  width: 130px;
+  left: 20px;
+  margin-top: 15px;
+}
+
+.sql-col-fk {
+  position: relative;
+  display: flex;
+  width: 200px;
+  left: 10px;
+  margin-top: 15px;
+}
+.sql-col-mt {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+#sqlQuery {
+  border: 2px solid black;
+  width: 100vh;
+}
+
+.field-style {
+  margin-top: -20px;
+}
+
+.execute-sql-buttons {
+  width: 40px;
+  margin: auto;
+}
+
+.sqlQ {
+  border: 2px solid;
+  width: auto;
+  height: 86%;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+}
+
+.queryBox {
+  width: 100px;
+  height: 1.5rem;
+  position: relative;
+  /* border: 2px solid red; */
+  left: 45%;
+  top: 1.5px;
+  border-radius: 10px;
+  background-color: slategrey;
+  color: azure;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.sqlQ_body {
+  height: 400px;
+  position: relative;
+  border: 2px solid purple;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  margin-top: 2px;
+}
+
+.inner-box-left {
+  width: 50px;
+  flex-direction: column;
+  display: flex;
+}
+.inner-box-right {
+  flex: 1;
+  margin-left: 5px;
+}
+
+.row-item {
+  display: flex;
+  justify-content: center;
+}
+
+textarea {
+  color: white;
+  background-color: rgb(47, 47, 46);
+}
+textarea::selection {
+  background: rgb(200, 131, 3);
+}
+
+.sqlQ_result {
+  height: 400px;
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  margin: 5px auto;
+  margin-top: 7px;
+  overflow-y: auto;
+}
+.mt-0 {
+  position: relative;
+  top: 5px;
+}
+
+#csvPreview {
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 10px;
+}
+#rotateImg {
+  transition: transform 0.3s ease;
+}
+
+.genisEkran {
+  overflow-y: auto;
+  max-height: 800px; /* İstediğiniz yüksekliğe göre ayarlayabilirsiniz */
+}
+
+.table thead th {
+  text-align: center;
+}
+
+input[type="text"] {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#prettyPrint {
+  background-color: #f0f0f0; /* Arka plan rengi */
+  color: #333; /* Yazı rengi */
+  padding: 5px 10px; /* İç boşluk */
+  border-radius: 5px; /* Kenar yuvarlatma */
+  border: 1px solid #ccc; /* Kenarlık */
+  font-size: 14px; /* Yazı tipi boyutu */
+}
