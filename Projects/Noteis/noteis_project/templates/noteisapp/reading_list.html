@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reading List</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
+  }
+
+  h1, h2 {
+    text-align: center;
+    color: #333;
+  }
+
+  #bookForm, #readingList {
+    max-width: 400px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+
+  button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #0056b3;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  li {
+    margin-bottom: 5px;
+    padding: 8px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .delete-btn {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 5px 8px;
+    border-radius: 15px;
+    cursor: pointer;
+    width:30%;
+  }
+
+  .delete-btn:hover {
+    background-color: #c82333;
+  }
+</style>
+</head>
+<body>
+  <h1>Reading List</h1>
+
+  <!-- Form to add books to the reading list -->
+  <div id="bookForm">
+    <h2>Add Book</h2>
+    <form onsubmit="addBook(); return false;">
+      <label for="bookTitle">Title:</label>
+      <input type="text" id="bookTitle" name="bookTitle" required>
+      <label for="bookAuthor">Author:</label>
+      <input type="text" id="bookAuthor" name="bookAuthor" required>
+      <button type="submit">Add Book</button>
+    </form>
+  </div>
+
+  <!-- Reading list to display added books -->
+  <div id="readingList">
+    <h2>My Reading List!</h2>
+    <ul id="books"></ul>
+  </div>
+
+  <script>
+    // Function to add a book to the reading list
+    function addBook() {
+      var title = document.getElementById("bookTitle").value;
+      var author = document.getElementById("bookAuthor").value;
+
+      // Create a new list item for the book
+      var bookItem = document.createElement("li");
+      bookItem.innerHTML = `
+        <span>${title} by ${author}</span>
+        <button class="delete-btn" onclick="deleteBook(this)">Delete</button>
+      `;
+
+      // Add the book item to the reading list
+      document.getElementById("books").appendChild(bookItem);
+
+      // Clear the form fields after adding the book
+      document.getElementById("bookTitle").value = "";
+      document.getElementById("bookAuthor").value = "";
+    }
+
+    // Function to delete a book from the reading list
+    function deleteBook(button) {
+      var listItem = button.parentElement;
+      listItem.remove();
+    }
+  </script>
+</body>
+</html>

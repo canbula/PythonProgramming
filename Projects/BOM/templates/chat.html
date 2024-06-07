@@ -1,0 +1,22 @@
+{% extends "addnotes.html" %}
+{% block form %}
+<div class="form-container">
+    <form method="POST" action="/chat">
+        {{ form.hidden_tag() }}
+        {{ form.csrf_token }}
+        <div class="form-group">
+            {{ form.BomAI.label }}
+            {{ form.BomAI(class="form-control") }}
+        </div>
+        <div class="button-container">
+            <button type="submit" name="action" value="answer">Answer</button>
+        </div>
+    </form>
+    <p>{{ answer_description }}</p>
+    <form method="POST" action="/userpage">
+        <div class="button-container">
+            <button type="submit" name="action" value="cancel">Cancel</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

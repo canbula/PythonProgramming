@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ThinkTank</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.css' rel='stylesheet' />
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js'></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var calendarModal = document.getElementById("calendarModal");
+            var calendarBtn = document.getElementById("calendarBtn");
+            var spans = document.getElementsByClassName("close");
+
+            var trashModal = document.getElementById("trashModal");
+            var trashBtn = document.getElementById("trashBtn");
+
+            var addEventModal = document.getElementById("addEventModal");
+            var addEventForm = document.getElementById("addEventForm");
+
+            var searchBox = document.querySelector(".search-box");
+            var trashItems = document.querySelectorAll(".trash-item");
+
+            // Open calendar modal
+            calendarBtn.onclick = function() {
+                calendarModal.style.display = "block";
+                var calendarEl = document.getElementById('calendar');
+                var calendar = new FullCalendar.Calendar(calendarEl, {
+                    initialView: 'dayGridMonth',
+                    dateClick: function(info) {
+                        document.getElementById("eventDate").value = info.dateStr;
+                        document.getElementById("selectedDate").textContent = "Selected Date: " + info.dateStr;
+                        addEventModal.style.display = "block";
+                    }
+                });
+                calendar.render();
+            }
+
+            // Open trash modal
+            trashBtn.onclick = function() {
+                trashModal.style.display = "block";
+            }
+
+            // Close modals
+            for (var i = 0; i < spans.length; i++) {
+                spans[i].onclick = function() {
+                    calendarModal.style.display = "none";
+                    addEventModal.style.display = "none";
+                    trashModal.style.display = "none";
+                }
+            }
+
+            window.onclick = function(event) {
+                if (event.target == calendarModal) {
+                    calendarModal.style.display = "none";
+                }
+                if (event.target == addEventModal) {
+                    addEventModal.style.display = "none";
+                }
+                if (event.target == trashModal) {
+                    trashModal.style.display = "none";
+                }
+            }
+
+            // Submit add event form
+            addEventForm.onsubmit = function(event) {
+                event.preventDefault();
+                var formData = $(addEventForm).serialize();
+                $.ajax({
+                    type: 'POST',
+                    url: '/add_event',
+                    data: formData,
+                    success: function(response) {
+                        window.location.href = "/";
+                    },
+                    error: function(response) {
+                        console.error('Error:', response);
+                    }
+                });
+            }
+
+            // Search functionality
+            searchBox.oninput = function() {
+                var filter = searchBox.value.toLowerCase();
+                trashItems.forEach(function(item) {
+                    var text = item.querySelector("span").textContent.toLowerCase();
+                    if (text.includes(filter)) {
+                        item.style.display = "";
+                    } else {
+                        item.style.display = "none";
+                    }
+                });
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>ThinkTank</h2>
+        <ul>
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('add') }}">Add Page</a></li>
+            <li><a href="#" id="trashBtn">Trash</a></li>
+            <li><a href="#" id="calendarBtn">Takvim</a></li>
+        </ul>
+        <div class="auth-links">
+            {% if current_user.is_authenticated %}
+                <a href="{{ url_for('logout') }}" class="button">Logout</a>
+            {% else %}
+                <a href="{{ url_for('login') }}" class="button">Login</a>
+                <a href="{{ url_for('signup') }}" class="button">Sign Up</a>
+            {% endif %}
+        </div>
+    </div>
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+
+    <!-- Calendar Modal -->
+    <div id="calendarModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Takvim</h2>
+            <div id="calendar"></div>
+        </div>
+    </div>
+
+    <!-- Add Event Modal -->
+    <div id="addEventModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Görev veya Not Ekle</h2>
+            <p id="selectedDate"></p>
+            <form id="addEventForm" method="post" action="{{ url_for('add_event') }}">
+                <input type="hidden" id="eventDate" name="date" required>
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <label for="title">Başlık:</label>
+                <input type="text" id="title" name="title" required>
+                <label for="description">Açıklama:</label>
+                <textarea id="description" name="description" required></textarea>
+                <button type="submit">Kaydet</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Trash Modal -->
+    <div id="trashModal" class="modal">
+        <div class="modal-content trash-content">
+            <span class="close">&times;</span>
+            <h2>Trash</h2>
+            <input type="text" placeholder="Search pages in Trash" class="search-box">
+            <ul class="trash-list">
+                {% for page in trash_pages %}
+                    <li class="trash-item">
+                        <span>{{ page.title }}</span>
+                        <form action="{{ url_for('restore', page_id=page.id) }}" method="post" style="display:inline;">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                            <button type="submit" class="restore-btn">Restore</button>
+                        </form>
+                        <form action="{{ url_for('permanent_delete', page_id=page.id) }}" method="post" style="display:inline;">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                            <button type="submit" class="delete-btn">Delete Permanently</button>
+                        </form>
+                    </li>
+                {% endfor %}
+            </ul>
+            <p class="trash-info">Starting 17 Haziran 2024, pages in Trash for over 30 days will be automatically deleted</p>
+        </div>
+    </div>
+</body>
+</html>

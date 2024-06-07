@@ -1,0 +1,331 @@
+{% extends "notion_app/template.html" %}
+{% block content %}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+        }
+
+        .sidebar {
+            background-color: #333;
+            color: white;
+            width: 200px;
+            height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+            position: fixed;
+            overflow-y: auto;
+        }
+
+        .sidebar h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .sidebar .menu {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar .menu li {
+            margin-bottom: 20px;
+        }
+
+        .sidebar .menu li a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .sidebar .menu li a i {
+            margin-right: 10px;
+        }
+
+        .sidebar .menu li a:hover {
+            text-decoration: underline;
+        }
+
+        .content {
+            margin-left: 220px;
+            padding: 20px;
+            width: calc(100% - 440px); /* Adjusted to accommodate the add book section */
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .bookshelf {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            flex-grow: 1; /* Make the bookshelf take available space */
+        }
+
+        .book-card {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            width: 150px;
+            position: relative;
+        }
+
+        .book-card img {
+            border-radius: 8px;
+            width: 100%;
+            height: auto;
+        }
+
+        .book-card h3 {
+            font-size: 16px;
+            margin: 10px 0 5px;
+        }
+
+        .book-card p {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .book-card .status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .status.completed {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        .status.not-started {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .status.reading {
+            background-color: #ff9800;
+            color: white;
+        }
+
+        .add-book-section {
+            background-color: #f1f1f1;
+            padding: 20px;
+            box-sizing: border-box;
+            width: 220px;
+            position: fixed;
+            right: 0;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .add-book-section h3 {
+            margin-top: 0;
+        }
+
+        .add-book-form input,
+        .add-book-form select {
+            margin-bottom: 10px;
+            padding: 10px;
+            width: calc(100% - 22px);
+            box-sizing: border-box;
+        }
+
+        .add-book-form button {
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .add-book-form button:hover {
+            background-color: #555;
+        }
+
+        .show-form-button {
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .show-form-button:hover {
+            background-color: #555;
+        }
+
+        .delete-button {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: transparent;
+            color: #888;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .delete-button:hover {
+            color: #000;
+        }
+
+        .status-dropdown {
+            margin-top: 10px;
+            padding: 5px 10px;
+            background-color: #ddd;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .status-dropdown:hover {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="content" id="content">
+        <h2 id="page-title">Reading List</h2>
+        <div class="bookshelf" id="bookshelf"></div>
+    </div>
+    <div class="add-book-section">
+        <button class="show-form-button" onclick="toggleForm()">Add a New Book</button>
+        <div class="add-book-form" id="add-book-form" style="display: none;">
+            <h3>Add a New Book</h3>
+            <input type="text" id="book-title" placeholder="Book Title">
+            <input type="text" id="book-author" placeholder="Author">
+            <input type="text" id="book-image" placeholder="Image URL">
+            <select id="book-status">
+                <option value="completed">Completed</option>
+                <option value="not-started">Not started</option>
+                <option value="reading">Reading</option>
+            </select>
+            <button onclick="addBook()">Add Book</button>
+        </div>
+    </div>
+    <script>
+        const books = [
+            {
+                title: "Name of Book",
+                author: "Author",
+                status: "completed",
+                image: "https://via.placeholder.com/150"
+            },
+        ];
+
+        function renderBooks() {
+            const bookshelf = document.getElementById('bookshelf');
+            bookshelf.innerHTML = '';
+            books.forEach((book, index) => {
+                const bookCard = document.createElement('div');
+                bookCard.className = 'book-card';
+                bookCard.innerHTML = `
+                    <img src="${book.image}" alt="Book Cover">
+                    <h3>${book.title}</h3>
+                    <p>${book.author}</p>
+                    <span class="status ${book.status}" onclick="toggleDropdown(${index})">${capitalizeFirstLetter(book.status)}</span>
+                    <button class="delete-button" onclick="deleteBook(${index})">&times;</button>
+                    <select class="status-dropdown" onchange="changeStatus(${index}, this.value)">
+                        <option value="not-started" ${book.status === 'not-started' ? 'selected' : ''}>Not started</option>
+                        <option value="reading" ${book.status === 'reading' ? 'selected' : ''}>Reading</option>
+                        <option value="completed" ${book.status === 'completed' ? 'selected' : ''}>Completed</option>
+                    </select>
+                `;
+                bookshelf.appendChild(bookCard);
+            });
+        }
+
+        function capitalizeFirstLetter(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+
+        function addBook() {
+            const title = document.getElementById('book-title').value;
+            const author = document.getElementById('book-author').value;
+            const image = document.getElementById('book-image').value;
+            const status = document.getElementById('book-status').value;
+
+            const newBook = {
+                title,
+                author,
+                status,
+                image
+            };
+
+            books.push(newBook);
+            renderBooks();
+
+            // Clear the input fields
+            document.getElementById('book-title').value = '';
+            document.getElementById('book-author').value = '';
+            document.getElementById('book-image').value = '';
+            document.getElementById('book-status').value = 'not-started';
+
+            // Hide the form after adding a book
+            toggleForm();
+        }
+
+        function deleteBook(index) {
+            books.splice(index, 1);
+            renderBooks();
+        }
+
+        function changeStatus(index, newStatus) {
+            books[index].status = newStatus;
+            renderBooks();
+        }
+
+        function toggleForm() {
+            const form = document.getElementById('add-book-form');
+            form.style.display = form.style.display === 'none' || form.style.display === '' ? 'block' : 'none';
+        }
+
+        function toggleDropdown(index) {
+            const dropdown = document.querySelector(`.book-card:nth-child(${index + 1}) .status-dropdown`);
+            dropdown.style.display = dropdown.style.display === 'none' || dropdown.style.display === '' ? 'block' : 'none';
+        }
+
+        document.getElementById('reading-list-btn').addEventListener('click', function() {
+            loadPage('Reading List');
+        });
+
+        document.getElementById('quick-note-btn').addEventListener('click', function() {
+            loadPage('Quick Note');
+        });
+
+        document.getElementById('meal-planner-btn').addEventListener('click', function() {
+            loadPage('Meal Planner');
+        });
+
+        document.getElementById('calendar-btn').addEventListener('click', function() {
+            loadPage('Calendar');
+        });
+
+        document.getElementById('todo-list-btn').addEventListener('click', function() {
+            loadPage('Todo List');
+        });
+
+        function loadPage(pageName) {
+            document.getElementById('page-title').innerText = pageName;
+            document.getElementById('content').innerHTML = `<h2>${pageName}</h2>`;
+        }
+
+        // Render the books when the page loads
+        renderBooks();
+    </script>
+</body>
+</html>
+{% endblock content %}

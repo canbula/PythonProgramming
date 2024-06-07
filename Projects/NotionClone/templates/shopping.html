@@ -1,0 +1,49 @@
+{% extends 'layout.html' %}
+
+{% load static %}
+
+{% block css_files %}
+    {{ block.super }} 
+    <link rel="stylesheet" href="{% static 'block/css/style.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/sidebar.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.2/main.min.css">
+{% endblock  %}
+
+{% block title %}
+    Shopping
+{% endblock %}
+
+{% block content %}
+ 
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            {% include 'includes/sidebar.html' %}
+        </div>
+        <div class="col-md-9">
+            <div class="container mt-5">
+                <h2>Alışveriş Listesi</h2>
+                <form>
+                    <div class="form-group">
+                        <label for="itemName">Ürün Adı:</label>
+                        <input type="text" class="form-control" id="itemName" placeholder="Ürün adını girin">
+                    </div>
+                    <div class="form-group">
+                        <label for="itemLink">Ürün Linki:</label>
+                        <input type="url" class="form-control" id="itemLink" placeholder="Ürünün linkini girin">
+                    </div>
+                    <div class="form-group">
+                        <label for="itemImage">Ürün Resmi:</label>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="itemImage">
+                            <label class="custom-file-label" for="itemImage">Resim Seçin</label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Listeye Ekle</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+    
+{% endblock %}

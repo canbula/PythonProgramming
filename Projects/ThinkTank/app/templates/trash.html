@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Trash</h1>
+    <ul>
+        {% for page in pages %}
+            <li>
+                {{ page.title }}
+                <form action="{{ url_for('restore', page_id=page.id) }}" method="post" style="display:inline;">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button type="submit">Restore</button>
+                </form>
+                <form action="{{ url_for('permanent_delete', page_id=page.id) }}" method="post" style="display:inline;">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button type="submit">Delete Permanently</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('index') }}">Back to Home</a>
+{% endblock %}

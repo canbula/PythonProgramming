@@ -1,0 +1,387 @@
+/* Genel stil ayarları */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #1a1a1a;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: #ff9900;
+    font-weight: bold;
+}
+
+a:hover {
+    color: #ff6600;
+}
+
+/* Sidebar stil ayarları */
+.sidebar {
+    background: #2b2b2b;
+    color: white;
+    width: 280px;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #444;
+    justify-content: space-between;
+}
+
+.sidebar h2 {
+    margin: 0 0 20px;
+    font-size: 24px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 10px;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.sidebar ul li a:hover {
+    text-decoration: underline;
+}
+
+.auth-links {
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+}
+
+.auth-links a.button {
+    background-color: #2b2b2b; /* Renk değiştirildi */
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 10px;
+    border: 1px solid #444; /* Sınır ekle */
+}
+
+.auth-links a.button:hover {
+    background-color: #444; /* Hover efekti için renk değiştirildi */
+}
+
+/* Container stil ayarları */
+.container {
+    background: #1a1a1a;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-y: auto;
+    flex-grow: 1;
+    height: calc(100vh - 40px);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+}
+
+.header img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.card {
+    background: #2d2d2d;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.card h3 {
+    margin: 0 0 10px;
+}
+
+.card p {
+    margin: 0;
+}
+
+/* Form stil ayarları */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #444;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #333;
+    color: white;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+textarea:focus {
+    border-color: #ff9900;
+    outline: none;
+}
+
+label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    display: inline-block;
+    color: #bbb;
+}
+
+/* Button stil ayarları */
+.form-button {
+    background-color: #2b2b2b;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.form-button:hover {
+    background-color: #444;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Edit ve Delete button styling */
+.edit-button, .delete-button {
+    width: 80px; /* Genişliği sabitle */
+    height: 40px; /* Yüksekliği sabitle */
+    padding: 0; /* İç boşlukları sıfırla */
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex; /* Flexbox kullan */
+    justify-content: center; /* Yatayda ortala */
+    align-items: center; /* Dikeyde ortala */
+}
+
+.edit-button {
+    background-color: #008CBA; /* Blue */
+    color: white;
+    margin-top: 5px; /* Edit butonunu biraz aşağı al */
+}
+
+.edit-button:hover {
+    background-color: #007B9E;
+}
+
+.delete-button {
+    background-color: #ff5c5c; /* Red */
+    color: white;
+}
+
+.delete-button:hover {
+    background-color: #ff1a1a;
+}
+
+/* List item stil ayarları */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+li:last-child {
+    border-bottom: none;
+}
+
+.list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.list-item-title {
+    flex-grow: 1;
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column; /* Butonları dikey hizala */
+    gap: 5px;
+    align-items: center;
+}
+
+/* Modal stil ayarları */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #2b2b2b;
+    color: white;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#calendar {
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+/* Additional new styles */
+.info-box {
+    background: #2b2b2b;
+    padding: 15px;
+    border-left: 4px solid #444;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+.info-box ul {
+    padding-left: 20px;
+    margin: 0;
+}
+
+.info-box li {
+    margin-bottom: 5px;
+}
+
+form {
+    display: inline;
+}
+
+/* Trash modal for styling */
+.trash-content {
+    width: 80%;
+    max-width: 800px;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.search-box {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.trash-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.trash-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.trash-item span {
+    flex: 1;
+}
+
+.trash-item form {
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.trash-item:last-child {
+    border-bottom: none;
+}
+
+.restore-btn, .delete-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+    min-width: 100px; /* Buton genişliğini sabitlemek için */
+    text-align: center;
+}
+
+.delete-btn {
+    background-color: #ff5c5c;
+}
+
+.restore-btn:hover {
+    background-color: #45a049;
+}
+
+.delete-btn:hover {
+    background-color: #ff1a1a;
+}
+
+.trash-info {
+    margin-top: 20px;
+    font-size: 12px;
+    color: #666;
+}

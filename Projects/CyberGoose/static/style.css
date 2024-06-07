@@ -1,0 +1,123 @@
+/* Custom CSS for menu */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.dropdown-menu2 {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.my-pc-win{
+    float: left;
+    width:30%;
+    border-style:solid;
+    border: 1px solid #acb1b2;
+    border-top: none;
+    border-left: none;
+    height: 450px; /* Örnek yükseklik */
+    overflow-y: auto; /* Dikey kaydırma için otomatik (ihtiyaç duyulduğunda) */
+    overflow-x: hidden; /* Yatay kaydırma için gizli */
+}
+.server-win{
+    float: left;
+    width:70%;
+    border-style:solid;
+    border: 1px solid #acb1b2;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    height: 450px;
+    overflow-y: auto; /* Dikey kaydırma için otomatik (ihtiyaç duyulduğunda) */
+    overflow-x: hidden; 
+}
+
+
+  
+  .my-pc-win::-webkit-scrollbar {
+    width: 12px; /* Genişlik */
+  }
+  
+  .my-pc-win::-webkit-scrollbar-thumb {
+    background-color: #888888; /* Arka plan rengi */
+    border-radius: 6px; /* Köşe yuvarlama */
+  }
+  
+  .my-pc-win::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Arka plan rengi */
+  }
+  
+  .my-pc-win::-webkit-scrollbar-thumb:hover {
+    background-color: #555; /* Fare üzerine gelindiğinde renk değiştirme */
+  }
+  
+  .server-win::-webkit-scrollbar {
+    width: 12px; /* Genişlik */
+  }
+  
+  .server-win::-webkit-scrollbar-thumb {
+    background-color: #888888; /* Arka plan rengi */
+    border-radius: 6px; /* Köşe yuvarlama */
+  }
+  
+  .server-win::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Arka plan rengi */
+  }
+  
+  .server-win::-webkit-scrollbar-thumb:hover {
+    background-color: #555; /* Fare üzerine gelindiğinde renk değiştirme */
+  }
+  
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-item {
+    color: black !important;
+}
+
+#table_divi{
+    width: 100%;
+    height: 100%;
+}
+#filepath{
+  width: 88%;
+  height:40px;
+}
+#serverfilepath{
+  width: 88%;
+  height:40px;
+}
+#btnserverpath{
+  padding-top:none;
+  
+}
+#btnpath{
+  padding-top:none;
+  
+}
+
+.selected-row{
+  background-color: #A9A9A9
+}
+.localpathdiv{
+  padding-top: 5px; 
+}
+.serverpathdiv{
+  padding-top:5px ;
+}
+#dosya_tablosu{
+  width: 50%;
+  height: 600px;
+}
+#comp-table{
+  width: 50%;
+  height: 600px;
+}
