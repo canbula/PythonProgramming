@@ -26,3 +26,6 @@ All announcements of this course will be done via Microsoft Teams. Join the grou
 - [Python Style Guide](https://www.python.org/dev/peps/pep-0008/)
 - [Advanced Guide to Python 3 Programming](https://link.springer.com/book/10.1007/978-3-030-25943-3) (John Hunt)
 - [Python for Everybody](https://www.py4e.com/book.php) (Charles Severance)
+
+# How to Create a Pull Request
+https://github.com/canbula/Statistics/assets/5307181/1995892c-6e7b-40ce-be7f-8f16f1aee0e0
