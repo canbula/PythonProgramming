@@ -1,8 +1,0 @@
-black==24.2.0
-pylint==3.1.0
-customtkinter==5.2.2
-python-tkdnd==0.2.1
-psutil==5.9.8
-sql-formatter==0.6.2
-tksheet==7.1.7
-pandas==2.2.2

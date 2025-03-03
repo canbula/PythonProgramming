@@ -1,5 +1,0 @@
-<ul>
-    {% for note in notes %}
-        <li><a style="text-decoration: none; color: #ffffff;" href="{% url 'note_detail' note.pk %}">{{ note.title }}</a></li>
-    {% endfor %}
-</ul>

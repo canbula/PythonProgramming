@@ -1,3 +1,0 @@
-Django==5.0.4
-fontawesomefree==6.5.1
-pillow==10.3.0

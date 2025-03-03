@@ -1,5 +1,0 @@
-{
-  "database": {
-    "rules": "realtime-db-security-rules.json"
-  }
-}
