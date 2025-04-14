@@ -1,0 +1,1521 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DB Browser for SQLite</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/static/style.css" type="text/css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link
+      rel="icon"
+      href="../static/icons/sqlitebrowser.png"
+      type="image/png"
+    />
+  </head>
+
+  <body>
+    <div class="container first">
+      <div class="row">
+        <div class="col">
+          <div class="btn-group">
+            <button
+              type="button"
+              class="btn dropdown-toggle"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              File
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <div class="ddia" id="file-new-db">
+                  <img
+                    src="../static/icons/database_add.svg"
+                    alt="New Database"
+                  />
+                  <a class="dropdown-item">New Database</a>
+                </div>
+              </li>
+              <li>
+                <div class="ddia">
+                  <a class="dropdown-item">New In-Memory Database</a>
+                </div>
+              </li>
+              <li>
+                <div class="ddia">
+                  <img
+                    src="../static/icons/database_go.svg"
+                    alt="Open Database"
+                  />
+                  <a class="dropdown-item" id="f-open-db">Open Database...</a>
+                </div>
+              </li>
+              <li>
+                <div class="ddia">
+                  <img
+                    src="../static/icons/database_go.svg"
+                    alt="Open Database Read Only"
+                  />
+                  <a class="dropdown-item">Open Database Read Only...</a>
+                </div>
+              </li>
+              <li>
+                <div class="ddia">
+                  <img
+                    src="../static/icons/database_link.svg"
+                    alt="Attach Database"
+                  />
+                  <a class="dropdown-item disabled" id="f-ad"
+                    >Attach Database...</a
+                  >
+                </div>
+              </li>
+              <li>
+                <div class="ddia">
+                  <img src="../static/icons/cross.svg" alt="Close Database" />
+                  <a class="dropdown-item disabled" id="f-cd">Close Database</a>
+                </div>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <div class="ddia">
+                  <img
+                    src="../static/icons/database_save.svg"
+                    alt="Write Changes"
+                  />
+                  <a class="dropdown-item disabled">Write Changes</a>
+                </div>
+              </li>
+              <li>
+                <div class="ddia">
+                  <img
+                    src="../static/icons/database_refresh.svg"
+                    alt="Revert Changes"
+                  />
+                  <a class="dropdown-item disabled">Revert Changes</a>
+                </div>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <div class="ddia">
+                  <a class="dropdown-item">Import</a>
+                  <img
+                    id="right-arrow"
+                    src="../static/icons/bullet_arrow_up.svg"
+                    alt="Window Layout"
+                  />
+                </div>
+                <ul class="dropdown-menu dropdown-submenu">
+                  <li>
+                    <a class="dropdown-item">Database from SQL file...</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item disabled" id="csv"
+                      >Table from CSV file</a
+                    >
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <div class="ddia">
+                  <a class="dropdown-item">Export</a>
+                  <img
+                    id="right-arrow"
+                    src="../static/icons/bullet_arrow_up.svg"
+                    alt="Window Layout"
+                  />
+                </div>
+                <ul class="dropdown-menu dropdown-submenu">
+                  <li>
+                    <a class="dropdown-item">Database to SQL file...</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item disabled" id="tableToCSV"
+                      >Table(s) as CSV file...</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item disabled" id="tableToJSON">Table to JSON...</a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <div class="ddia">
+                  <img
+                    src="../static/icons/package_go.svg"
+                    alt="Open Project"
+                  />
+                  <a class="dropdown-item" id="openProject">Open Project</a>
+                </div>
+              </li>
+              <li>
+                <div class="ddia">
+                  <img
+                    src="../static/icons/package_save.svg"
+                    alt="Save Project"
+                  />
+                  <a class="dropdown-item disabled" id="f-sp">Save Project</a>
+                </div>
+              </li>
+              <li>
+                <div class="ddia">
+                  <img
+                    src="../static/icons/package_rename.svg"
+                    alt="Save Project As"
+                  />
+                  <a class="dropdown-item disabled" id="f-spa"
+                    >Save Project As...</a
+                  >
+                </div>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <div class="ddia">
+                  <img src="../static/icons/database_save.svg" alt="Save All" />
+                  <a class="dropdown-item disabled" id="f-sa">Save All</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="btn-group">
+            <button
+              type="button"
+              class="btn dropdown-toggle"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Edit
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <div class="ddia">
+                  <img src="../static/icons/table_add.svg" alt="Create Table" />
+                  <a class="dropdown-item disabled" id="createTable"
+                    >Create Table...</a
+                  >
+                </div>
+              </li>
+              <li>
+                <div class="ddia">
+                  <img
+                    src="../static/icons/table_edit.svg"
+                    alt="Modify Table"
+                  />
+                  <a class="dropdown-item disabled" id="modifyTable"
+                    >Modify Table...</a
+                  >
+                </div>
+              </li>
+              <li>
+                <div class="ddia">
+                  <img
+                    src="../static/icons/table_delete.svg"
+                    alt="Delete Table"
+                  />
+                  <a class="dropdown-item disabled" id="deleteTable"
+                    >Delete Table...</a
+                  >
+                </div>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <div class="ddia">
+                  <img
+                    src="../static/icons/tag_blue_add.svg"
+                    alt="Create Index"
+                  />
+                  <a class="dropdown-item disabled" href="#">Create Index...</a>
+                </div>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <div class="ddia">
+                  <img src="../static/icons/wrench.svg" alt="Preferences" />
+                  <a class="dropdown-item" href="#">Preferences...</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="btn-group">
+            <button
+              type="button"
+              class="btn dropdown-toggle"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              View
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <div class="ddia">
+                  <img
+                    src="../static/icons/application_side_list.svg"
+                    alt="SQL Log"
+                  />
+                  <a class="dropdown-item" href="#">SQL Log</a>
+                </div>
+              </li>
+              <li>
+                <div class="ddia">
+                  <img
+                    src="../static/icons/application_side_list.svg"
+                    alt="Plot"
+                  />
+                  <a class="dropdown-item" href="#">Plot</a>
+                </div>
+              </li>
+              <li>
+                <div class="ddia">
+                  <img
+                    src="../static/icons/application_side_list.svg"
+                    alt="DB Schema"
+                  />
+                  <a class="dropdown-item" href="#">DB Schema</a>
+                </div>
+              </li>
+              <li>
+                <div class="ddia">
+                  <img
+                    src="../static/icons/application_side_list.svg"
+                    alt="Edit Database Cell"
+                  />
+                  <a class="dropdown-item" href="#">Edit Database Cell</a>
+                </div>
+              </li>
+              <li>
+                <div class="ddia">
+                  <img
+                    src="../static/icons/application_side_list.svg"
+                    alt="Remote"
+                  />
+                  <a class="dropdown-item" href="#">Remote</a>
+                </div>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <div class="ddia">
+                  <img
+                    src="../static/icons/layout_sidebar.svg"
+                    alt="DB Toolbar"
+                  />
+                  <a class="dropdown-item" href="#">DB Toolbar</a>
+                </div>
+              </li>
+              <li>
+                <div class="ddia">
+                  <img
+                    src="../static/icons/layout_sidebar.svg"
+                    alt="Extra DB Toolbar"
+                  />
+                  <a class="dropdown-item" href="#">Extra DB Toolbar</a>
+                </div>
+              </li>
+              <li>
+                <div class="ddia">
+                  <img
+                    src="../static/icons/layout_sidebar.svg"
+                    alt="Project Toolbar"
+                  />
+                  <a class="dropdown-item" href="#">Project Toolbar</a>
+                </div>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <div class="ddia">
+                  <img
+                    src="../static/icons/page_white_database.svg"
+                    alt="Database Structure"
+                  />
+                  <a class="dropdown-item" href="#">Database Structure</a>
+                </div>
+              </li>
+              <li>
+                <div class="ddia">
+                  <img
+                    src="../static/icons/page_white_database.svg"
+                    alt="Browse Data"
+                  />
+                  <a class="dropdown-item" href="#">Browse Data</a>
+                </div>
+              </li>
+              <li>
+                <div class="ddia">
+                  <img
+                    src="../static/icons/page_white_database.svg"
+                    alt="Edit Pragmas"
+                  />
+                  <a class="dropdown-item" href="#">Edit Pragmas</a>
+                </div>
+              </li>
+              <li>
+                <div class="ddia">
+                  <img
+                    src="../static/icons/page_white_database.svg"
+                    alt="Execute SQL"
+                  />
+                  <a class="dropdown-item" href="#">Execute SQL</a>
+                </div>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <div class="ddia">
+                  <a class="dropdown-item">Window Layout</a>
+                  <img
+                    id="right-arrow"
+                    src="../static/icons/bullet_arrow_up.svg"
+                    alt="Window Layout"
+                  />
+                </div>
+                <ul class="dropdown-menu dropdown-submenu">
+                  <li>
+                    <a class="dropdown-item" href="#">Reset Windows Layout</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">Simply Window Layout</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">Dock Windows at Bottom</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#"
+                      >Dock Windows at Left Side</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">Dock Windows at Top</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div class="btn-group">
+            <button
+              type="button"
+              class="btn dropdown-toggle"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Tools
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <a class="dropdown-item" id="t-cd">Compact Database...</a>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <div class="ddia">
+                  <img
+                    src="../static/icons/plugin_add.svg"
+                    alt="Load Extension"
+                  />
+                  <a class="dropdown-item" id="t-le">Load Extension...</a>
+                </div>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li><a class="dropdown-item" id="t-ic">Integrity Check</a></li>
+              <li>
+                <a class="dropdown-item" id="t-qic">Quick Integrity Check</a>
+              </li>
+              <li><a class="dropdown-item" id="t-fkc">Foreign-Key Check</a></li>
+              <li><a class="dropdown-item" id="t-o">Optimize</a></li>
+            </ul>
+          </div>
+          <div class="btn-group">
+            <button
+              type="button"
+              class="btn dropdown-toggle"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Help
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <div class="ddia">
+                  <img src="../static/icons/help.svg" alt="What's This" />
+                  <a class="dropdown-item" href="#">What's This?</a>
+                </div>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <div class="ddia">
+                  <i class="fa-solid fa-earth-americas fa-xs"></i>
+                  <a class="dropdown-item" href="#">Website</a>
+                </div>
+              </li>
+              <li>
+                <div class="ddia">
+                  <i class="fa-solid fa-earth-americas fa-xs"></i>
+                  <a class="dropdown-item" href="#">Wiki</a>
+                </div>
+              </li>
+              <li>
+                <div class="ddia">
+                  <i class="fa-solid fa-earth-americas fa-xs"></i>
+                  <a class="dropdown-item" href="#">SQLCipher FAQ</a>
+                </div>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <div class="ddia">
+                  <i class="fa-solid fa-earth-americas fa-xs"></i>
+                  <a class="dropdown-item" href="#">Bug Report...</a>
+                </div>
+              </li>
+              <li>
+                <div class="ddia">
+                  <i class="fa-solid fa-earth-americas fa-xs"></i>
+                  <a class="dropdown-item" href="#">Feature Request...</a>
+                </div>
+              </li>
+              <li>
+                <div class="ddia">
+                  <i class="fa-solid fa-earth-americas fa-xs"></i>
+                  <a class="dropdown-item" href="#">Donate on Patreon...</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container second">
+      <div class="row">
+        <div class="col">
+          <div class="display">
+            <button type="button" class="btn" id="dbbutton">
+              <img src="../static/icons/database_add.svg" alt="New Database" />
+              <span>New Database</span>
+            </button>
+          </div>
+          <div class="display">
+            <button type="button" class="btn" id="openDB">
+              <img src="../static/icons/database_go.svg" alt="Open Database" />
+              <span>Open Database</span>
+            </button>
+          </div>
+          <div class="display">
+            <span class="pipe">&#124;</span>
+          </div>
+          <div class="display">
+            <button type="button" class="btn" disabled>
+              <img
+                src="../static/icons/database_save.svg"
+                alt="Write Changes"
+              />
+              <span>Write Changes</span>
+            </button>
+          </div>
+          <div class="display">
+            <button type="button" class="btn" disabled>
+              <img
+                src="../static/icons/database_refresh.svg"
+                alt="Revert Changes"
+              />
+              <span>Revert Changes</span>
+            </button>
+          </div>
+          <div class="display">
+            <span class="pipe">&#124;</span>
+          </div>
+          <div class="display">
+            <button type="button" class="btn">
+              <img src="../static/icons/package_go.svg" alt="Revert Changes" />
+              <span>Open Project</span>
+            </button>
+          </div>
+          <div class="display">
+            <button type="button" class="btn" disabled id="save-project">
+              <img
+                src="../static/icons/package_save.svg"
+                alt="Revert Changes"
+              />
+              <span>Save Project</span>
+            </button>
+          </div>
+          <div class="display">
+            <span class="pipe">&#124;</span>
+          </div>
+          <div class="display">
+            <button type="button" class="btn" disabled id="ad-database">
+              <img
+                src="../static/icons/database_link.svg"
+                alt="Revert Changes"
+              />
+              <span>Attach Database</span>
+            </button>
+          </div>
+          <div class="display">
+            <button type="button" class="btn" disabled id="c-database">
+              <img src="../static/icons/cross.svg" alt="Revert Changes" />
+              <span>Close Database</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-7 column1">
+          <div class="row butm">
+            <div class="col">
+              <button type="button" class="btn" id="dbStructure">
+                Database Structure
+              </button>
+            </div>
+            <div class="col">
+              <button type="button" class="btn" id="browseData">
+                Browse Data
+              </button>
+            </div>
+            <div class="col">
+              <button type="button" class="btn" id="editParagmas">
+                Edit Paragmas
+              </button>
+            </div>
+            <div class="col">
+              <button type="button" class="btn" id="executeSQL">
+                Execute SQL
+              </button>
+            </div>
+          </div>
+          <div class="row genisEkran">
+            <div class="col">
+              <div
+                class="row align-items-center"
+                style="height: 30px; display: flex; margin-bottom: 8px"
+              >
+                <button
+                  class="btn"
+                  type="button"
+                  disabled
+                  id="mCT"
+                  style="width: 150px; cursor: pointer"
+                >
+                  <img src="../static/icons/table_add.svg" />
+                  <span>Create Table</span>
+                </button>
+                <button
+                  class="btn"
+                  type="button"
+                  disabled
+                  id="mCI"
+                  style="width: 150px; cursor: pointer"
+                >
+                  <img src="../static/icons/tag_blue_add.svg" />
+                  <span>Create Index</span>
+                </button>
+                <button
+                  class="btn"
+                  type="button"
+                  disabled
+                  style="width: 150px; cursor: pointer"
+                >
+                  <img src="../static/icons/table_edit.svg" />
+                  <span>Modify Table</span>
+                </button>
+                <button
+                  class="btn"
+                  type="button"
+                  disabled
+                  style="width: 150px; cursor: pointer"
+                >
+                  <img src="../static/icons/table_delete.svg" />
+                  <span>Delete Table</span>
+                </button>
+                <button
+                  class="btn"
+                  type="button"
+                  disabled
+                  style="width: 150px; cursor: pointer"
+                >
+                  <span class="pipe">|</span>
+                  <img src="../static/icons/printer.svg" />
+                  <span>Print</span>
+                </button>
+              </div>
+              <div class="row">
+                <div class="container">
+                  <div class="row" style="border: 1px black solid">
+                    <div class="col-5">Name</div>
+                    <div class="col-3">&#124; Type</div>
+                    <div class="col-2">&#124; Scheme</div>
+                  </div>
+                  <div class="row" id="large-area">
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-5" id="collapseCol">
+                          <div class="row" id="collapseTables">
+                          </div>
+                        </div>
+                        <div class="col-3" id="collapseType"></div>
+                        <div class="col-2"></div>  
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col" style="margin: 10px 0px 10px 1px">
+          <div class="row yarimEkran">
+            <div
+              class="topMenu align-items-center"
+              style="
+                border: 2px solid;
+                margin-top: 1px;
+                background-color: aliceblue;
+              "
+            >
+              <div class="sol">
+                <button type="button" class="btn d">
+                  <i
+                    class="fa-solid fa-xmark fa-2xs"
+                    style="color: #6e6e6e"
+                  ></i>
+                </button>
+                <button type="button" class="btn d">
+                  <i
+                    class="fa-regular fa-window-restore fa-2xs"
+                    style="color: #6e6e6e"
+                  ></i>
+                </button>
+              </div>
+              <div class="sag">
+                <p>Edit Database Cell</p>
+              </div>
+            </div>
+            <div class="ortaMenu">
+              <div class="ddl">
+                <div class="input-group mb-3">
+                  <label class="input-group-text" for="inputGroupSelect01"
+                    >Mode:</label
+                  >
+                  <select class="form-select" id="inputGroupSelect01" disabled>
+                    <option class="text-light">Text</option>
+                    <option value="1">RTL Text</option>
+                    <option value="2">Binary</option>
+                    <option value="3">Image</option>
+                    <option value="4">JSON</option>
+                    <option value="5">XML</option>
+                  </select>
+                </div>
+              </div>
+              <div class="cog">
+                <img
+                  id="cog_go"
+                  src="../static/icons/cog_go.svg"
+                  title="Automatically adjust the editor mode to the loaded data type"
+                />
+                <img
+                  id="cog"
+                  src="../static/icons/cog.svg"
+                  class="hidden"
+                  title="Automatically adjust the editor mode to the loaded data type"
+                />
+              </div>
+              <div class="i">
+                <img
+                  src="../static/icons/page_white_text.svg"
+                  title="Wrap lines on word boundaries"
+                />
+                <img
+                  src="../static/icons/indent-solid.svg"
+                  title="Auto-format: pretty print on loading, compact on saving."
+                />
+                <img
+                  src="../static/icons/file-arrow-up-solid.svg"
+                  title="Import from file"
+                />
+                <img
+                  src="../static/icons/page_save.svg"
+                  title="Export to file"
+                />
+                <img
+                  src="../static/icons/application_go.svg"
+                  title="Open in external application"
+                />
+                <img
+                  src="../static/icons/application_link.svg"
+                  title="Open in default application or browser"
+                />
+                <img
+                  src="../static/icons/textfield_delete.svg"
+                  title="Set as NULL"
+                />
+                <img
+                  src="../static/icons/printer.svg"
+                  title="Open preview diaglog for printing displayed text"
+                />
+              </div>
+            </div>
+            <div
+              class="altMenu"
+              style="border: 2px solid; margin: 2px 5px 2px 5px"
+            >
+              <p>NULL</p>
+            </div>
+            <div class="enAltMenu">
+              <div class="row align-items-center">
+                <div class="col" style="margin-top: 10px">
+                  <div class="row">
+                    <p>Type of data currently in cell</p>
+                  </div>
+                  <div class="row">
+                    <p>Size of data currently in table</p>
+                  </div>
+                </div>
+                <div class="col text-center">
+                  <button
+                    type="button"
+                    class="btn buttonApply btn-secondary disabled"
+                  >
+                    Apply
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row yarimEkran">
+            <div
+              class="topMenu2 align-items-center"
+              style="border: 2px solid; background-color: aliceblue"
+            >
+              <div class="sol">
+                <button type="button" class="btn d">
+                  <i
+                    class="fa-solid fa-xmark fa-2xs"
+                    style="color: #6e6e6e"
+                  ></i>
+                </button>
+                <button type="button" class="btn d">
+                  <i
+                    class="fa-regular fa-window-restore fa-2xs"
+                    style="color: #6e6e6e"
+                  ></i>
+                </button>
+              </div>
+              <div class="sag">
+                <p>Remote</p>
+              </div>
+            </div>
+            <div class="identity">
+              <div class="ddl">
+                <div class="input-group mb-3">
+                  <label class="input-group-text" for="inputGroupSelect02"
+                    >Identity</label
+                  >
+                  <select class="form-select" id="inputGroupSelect02">
+                    <option selected>Select an identity to connect</option>
+                    <option>Public</option>
+                  </select>
+                </div>
+              </div>
+              <div style="margin-left: 250px; margin-top: 18px">
+                <button type="button" class="btn" disabled>
+                  <img src="../static/icons/database_go.svg" />
+                </button>
+              </div>
+            </div>
+            <div class="menuButton text-center">
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-default active menu-btn">
+                  DBHub.io
+                </button>
+                <button type="button" class="btn btn-default menu-btn">
+                  Local
+                </button>
+                <button type="button" class="btn btn-default menu-btn">
+                  Current Database
+                </button>
+              </div>
+            </div>
+            <div class="dropMenu">
+              <div class="col">
+                <div
+                  class="row"
+                  style="
+                    border: 1px solid black;
+                    margin-top: 4px;
+                    background-color: #6e6e6e;
+                  "
+                >
+                  <div class="col-1">
+                    <button class="btn" type="button" style="display: flex">
+                      <img
+                        src="../static/icons/icons8-refresh.svg"
+                        style="width: 16px; height: 16px; margin-top: 5px"
+                        title="Reload all data and update the view"
+                      />
+                    </button>
+                  </div>
+                  <div class="col-2">
+                    <button class="btn" type="button" style="display: flex">
+                      <img
+                        src="../static/icons/database_add.svg"
+                        title="Use this to download a remote database for local editing using a URL as provided on the web page of the database"
+                        style="margin-top: 5px"
+                      />
+                    </button>
+                  </div>
+                </div>
+                <div class="row" style="margin-top: 10px">
+                  <div class="container">
+                    <div class="row" style="border: 1px black solid">
+                      <div class="col-5">Name</div>
+                      <div class="col-3">&#124; Last Modified</div>
+                      <div class="col-2">&#124; Size</div>
+                      <div class="col-2">&#124; Commit</div>
+                    </div>
+                    <div
+                      class="row"
+                      style="background-color: black; height: 163px"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="multiButtons">
+              <div class="menuButton text-center">
+                <div
+                  class="btn-group"
+                  role="group"
+                  aria-label="Basic example"
+                  id="btn-group"
+                >
+                  <button
+                    type="button"
+                    class="btn btn-default active menu-btns"
+                  >
+                    SQL Log
+                  </button>
+                  <button type="button" class="btn btn-default menu-btns">
+                    Plot
+                  </button>
+                  <button type="button" class="btn btn-default menu-btns">
+                    DB Scheme
+                  </button>
+                  <button type="button" class="btn btn-default menu-btns">
+                    Remote
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button
+      id="modalButton"
+      type="button"
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#staticBackdrop"
+      style="display: none"
+    >
+      Launch static backdrop modal
+    </button>
+    <div
+      class="modal modal-xl fade modal-fullscreen-sm-down"
+      id="staticBackdrop"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">
+              Edit table definition
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="table-n">
+              <div>
+                <p>Table</p>
+              </div>
+              <div>
+                <input type="text" id="table-name" style="width: 100vh" />
+                <p class="gap-1" style="margin-top: 5px">
+                  <img src="../static/icons/bullet_arrow_down.svg" />
+                  <button
+                    class="btn"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#advanced"
+                    aria-expanded="false"
+                    aria-controls="advanced"
+                    style="margin-left: -15px"
+                  >
+                    Advanced
+                  </button>
+                </p>
+                <div class="collapse" id="advanced">
+                  <div class="card card-body">
+                    <div class="input-group mb-3 d-advanced">
+                      <label class="input-group-text" for="databaseschema"
+                        >Database Schema</label
+                      >
+                      <select class="form-select" id="databaseschema">
+                        <option value="0" selected>main</option>
+                        <option value="1">temp</option>
+                      </select>
+                    </div>
+                    <div class="input-group mb-3 d-advanced">
+                      <label
+                        class="form-check-label"
+                        for="withoutRowid"
+                        style="margin-right: 20px"
+                        >Without Rowid</label
+                      >
+                      <input
+                        class="form-check-input me-1"
+                        type="checkbox"
+                        value=""
+                        id="withoutRowid"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="d-flex justify-content-center"
+              style="position: relative; z-index: 2"
+            >
+              <button class="btn active tfac" type="button">Fields</button>
+              <button class="btn tfac" type="button">Constraints</button>
+            </div>
+            <div
+              class="drop-tfac"
+              style="
+                border: 1px solid black;
+                top: -20px;
+                height: auto;
+                position: relative;
+                z-index: 1;
+              "
+            >
+              <div class="tableButton d-flex align-items-center">
+                <div id="addButton">
+                  <img src="../static/icons/page_add.svg" />
+                  <button class="btn" type="button">Add</button>
+                </div>
+                <div id="removeButton">
+                  <img src="../static/icons/page_delete.svg" />
+                  <button class="btn disabled" type="button" id="removeBButton">
+                    Remove
+                  </button>
+                </div>
+                <div id="moveTopButton">
+                  <img src="../static/icons/bullet_arrow_top.svg" />
+                  <button class="btn disabled" type="button" id="moveTButton">
+                    Move to top
+                  </button>
+                </div>
+                <div id="moveUpButton">
+                  <img src="../static/icons/bullet_arrow_up.svg" />
+                  <button class="btn disabled" type="button" id="moveUButton">
+                    Move to up
+                  </button>
+                </div>
+                <div id="moveDownButton">
+                  <img src="../static/icons/bullet_arrow_down.svg" />
+                  <button class="btn disabled" type="button" id="moveDButton">
+                    Move down
+                  </button>
+                </div>
+                <div id="moveBottomButton">
+                  <img src="../static/icons/bullet_arrow_bottom.svg" />
+                  <button id="moveBButton" class="btn disabled" type="button">
+                    Move to bottom
+                  </button>
+                </div>
+              </div>
+              <div class="queryDiv">
+                <div class="container">
+                  <div class="row">
+                    <div class="sql-col-name">Name</div>
+                    <div class="sql-col-type">| Type</div>
+                    <div class="sql-col-checkbox">| NN</div>
+                    <div class="sql-col-checkbox">| PK</div>
+                    <div class="sql-col-checkbox">| AI</div>
+                    <div class="sql-col-checkbox">| U</div>
+                    <div class="sql-col-default">| Default</div>
+                    <div class="sql-col-check">| Check</div>
+                    <div class="sql-col-collation">| Collation</div>
+                    <div class="sql-col-fk">| Foreign Key</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="sql-field">
+              <div class="sql-col">
+                <p class="sql-p">1</p>
+                <p class="sql-p">2</p>
+                <p class="sql-p">3</p>
+              </div>
+              <div class="sql-col">
+                <p class="sql-p">
+                  <button
+                    class="btn"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#sqlQuery"
+                    aria-expanded="false"
+                    aria-controls="sqlQuery"
+                    onclick="toggleSqlQuery()"
+                  >
+                    -
+                  </button>
+                </p>
+              </div>
+              <div class="sql-col sql-form">
+                <form action="/submit-sql" method="post">
+                  <div id="sqlQuery">
+                    <span class="sql-keyword">CREATE TABLE </span>
+                    "<span class="table-name" id="tableName"></span>" (
+                    <div class="sql-fields" id="fieldList"></div>
+                    );
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+              id="sqlQueryCancel"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              class="btn btn-primary disabled"
+              id="sqlQuerySave"
+            >
+              Save
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button
+      id="fileNewDB"
+      type="button"
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal"
+      style="display: none"
+    ></button>
+
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">
+              New Database
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="filePath" class="col-form-label">File Path:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="filePath"
+                  readonly
+                />
+              </div>
+              <div class="mb-3">
+                <label for="fileName" class="col-form-label">File Name:</label>
+                <input type="text" class="form-control" id="fileName" />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+              id="cancelFile"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary disabled"
+              id="saveFile"
+            >
+              Save
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mb-3" style="display: none" id="fileUploadDiv">
+      <!--dsd-->
+      <label for="formFile" class="form-label">Select Database</label>
+      <input class="form-control" type="file" id="formFile" />
+    </div>
+    <div class="mb-3" style="display: none" id="uploadCSV">
+      <!--sdsd-->
+      <label for="formFile" class="form-label">Select CSV File</label>
+      <input class="form-control" type="file" id="csvFile" />
+    </div>
+    <button
+      type="button"
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#importCsv"
+      id="csvImport"
+      style="display: none"
+    >
+      Import csv File
+    </button>
+    <div
+      class="modal fade"
+      id="importCsv"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">
+              Import CSV File
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="container">
+              <div class="col">
+                <div class="row">
+                  <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-sm"
+                      >Table</span
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      aria-label="Sizing example input"
+                      aria-describedby="inputGroup-sizing-sm"
+                      id="csvTableName"
+                    />
+                  </div>
+                  <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-sm"
+                      >Column names in first line</span
+                    >
+                    <input
+                      class="form-check-input mt-0"
+                      type="checkbox"
+                      id="colNameCheckBox"
+                      aria-label="Checkbox for following text input"
+                      style="margin-left: 10px"
+                      id="columnNamesInFirstLine"
+                    />
+                  </div>
+                  <div class="input-group mb-3">
+                    <label class="input-group-text" for="fieldSeparator"
+                      >Field Seperator</label
+                    >
+                    <select class="form-select" id="fieldSeparator">
+                      <option value="," selected>,</option>
+                      <option value=";">;</option>
+                      <option value="\t">Tab</option>
+                      <option value="3">|</option>
+                      <option value="otherPrintable">Other(printable)</option>
+                      <option value="otherCode">Other(code)</option>
+                    </select>
+                  </div>
+                  <div class="input-group mb-3">
+                    <label class="input-group-text" for="quoteCharacter"
+                      >Quote Character</label
+                    >
+                    <select class="form-select" id="quoteCharacter">
+                      <option value=""" selected>"</option>
+                      <option value="'">'</option>
+                      <option value=" ">None</option>
+                      <option value="otherPrintable">Other(printable)</option>
+                      <option value="otherCode">Other(code)</option>
+                    </select>
+                  </div>
+                  <div class="input-group mb-3">
+                    <label class="input-group-text" for="encoding"
+                      >Encoding</label
+                    >
+                    <select class="form-select" id="encoding">
+                      <option value="UTF-8" selected>UTF-8</option>
+                      <option value="UTF-16">UTF-16</option>
+                      <option value="ISO-8859-1">ISO-8859-1</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+                  <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-sm"
+                      >Trim fields?</span
+                    >
+                    <input
+                      class="form-check-input mt-0"
+                      type="checkbox"
+                      id="trimFields"
+                      aria-label="Trim fields?"
+                      style="margin-left: 10px"
+                    />
+                  </div>
+                  <p class="gap-1" style="margin-top: 5px">
+                    <img src="../static/icons/bullet_arrow_down.svg" />
+                    <button
+                      class="btn"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#csvadvanced"
+                      aria-expanded="false"
+                      aria-controls="csvadvanced"
+                      style="margin-left: -15px"
+                    >
+                      Advanced
+                    </button>
+                  </p>
+                  <div class="collapse" id="csvadvanced">
+                    <div class="card card-body">
+                      <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm"
+                          >Disable data type detection</span
+                        >
+                        <input
+                          class="form-check-input mt-0"
+                          type="checkbox"
+                          id="disableDataTypeDetection"
+                          aria-label="Checkbox for following text input"
+                          style="margin-left: 10px"
+                        />
+                      </div>
+                      <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm"
+                          >Ignore default values</span
+                        >
+                        <input
+                          class="form-check-input mt-0"
+                          type="checkbox"
+                          id="ignoreDefaultValues"
+                          aria-label="Checkbox for following text input"
+                          style="margin-left: 10px"
+                        />
+                      </div>
+                      <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm"
+                          >Fail on missing values</span
+                        >
+                        <input
+                          class="form-check-input mt-0"
+                          type="checkbox"
+                          id="failOnMissingValues"
+                          aria-label="Checkbox for following text input"
+                          style="margin-left: 10px"
+                        />
+                      </div>
+                      <div class="input-group mb-3">
+                        <label class="input-group-text" for="conflictStrategy"
+                          >Conflict strategy</label
+                        >
+                        <select class="form-select" id="conflictStrategy">
+                          <option value="abort" selected>Abort import</option>
+                          <option value="ignore">Ignore row</option>
+                          <option value="replace">Replace existing row</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row" id="csvPreview"></div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+              id="csvCancel"
+            >
+              Cancel
+            </button>
+            <button type="button" class="btn btn-primary disabled" id="csvOK">OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#exportJSON" style="display:none;" id="ejson">
+      Export JSON
+    </button>
+    <div class="modal fade" id="exportJSON" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exportJSONLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Export data as JSON</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="container">
+              <div class="col">
+                <div class="row" style="height:150px; overflow-y:auto">
+                  <div class="col-3" style="text-align:center">Table(s)</div>
+                  <div class="col-9" style="border:2px solid black; text-align:center;">
+                    <div id="tabletoJson"></div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-group mb-3" style="display:flex; margin-top:30px; justify-content:center;">
+                    <span class="input-group-text" id="prettyPrint">Pretty print</span>
+                    <input class="form-check-input" checked type="checkbox" value="" aria-label="Checkbox for following text input" style="margin-top:8px; margin-left:10px;">
+                  </div>
+                </div>  
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="JSONCancel">Cancel</button>
+            <button type="button" class="btn btn-primary" id="JSONSave">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#toCSV" style="display:none;" id="csvBut">
+      Table to CSV
+    </button>
+    <div class="modal fade" id="toCSV" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="toCSVLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Export data as CSV</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="container">
+              <div class="col">
+                <div class="row">
+                  <div class="col-3" style="text-align:center">Table(s)</div>
+                  <div class="col-9" style="border:2px solid black; text-align:center;">
+                    <div id="tabletoCSV" style="height:150px;"></div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-group input-group-sm" style="display:flex; margin-top:30px;">
+                    <span class="input-group-text" id="ColNFL">Column names in first line</span>
+                    <input class="form-check-input" checked type="checkbox" value="" aria-label="Checkbox for following text input" style="margin-top:8px; margin-left:10px;">
+                  </div>
+                  <div class="input-group" style="display:flex; margin-top:30px; justify-content:center;">
+                    <label class="input-group-text" for="fieldSeparator"
+                      >Field Seperator</label
+                    >
+                    <select class="form-select" id="fieldSeparator">
+                      <option value="," selected>,</option>
+                      <option value=";">;</option>
+                      <option value="\t">Tab</option>
+                      <option value="3">|</option>
+                      <option value="other">Other</option>  
+                    </select>
+                  </div>
+                  <div class="input-group" style="display:flex; margin-top:30px; justify-content:center;">
+                    <label class="input-group-text" for="quoteCharacter"
+                      >Quote Character</label
+                    >
+                    <select class="form-select" id="quoteCharacter">
+                      <option value=""" selected>"</option>
+                      <option value="'">'</option>
+                      <option value=" ">None</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+                  <div class="input-group" style="display:flex; margin-top:30px; justify-content:center;">
+                        <label class="input-group-text" for="newlinecharacters"
+                          >New line characters</label
+                        >
+                        <select class="form-select" id="newlinecharacters">
+                          <option value="Unix" selected>Unix: LF(\n)</option>
+                          <option value="Windows">Windows: CR+LF (\r\n)</option>
+                          <option value="Other">Other</option><input type="text" style="display:none"></input>  
+                        </select>
+                      </div>
+                </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="CSVCancel">Cancel</button>
+            <button type="button" class="btn btn-primary" id="CSVSave">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/script.js"></script>
+  </body>
+</html>
