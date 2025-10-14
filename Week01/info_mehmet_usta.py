@@ -1,2 +1,2 @@
-studentId = "220315026"
-full_name = "mehmet usta"
+student_id = "220315026"
+full_name = "Mehmet Usta"
