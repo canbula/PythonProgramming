@@ -6,8 +6,11 @@ def calculate_pyramid_height(number_of_blocks):
 
         total += i
 
-        if(number_of_blocks <= total):
+        if number_of_blocks == total:
             height = i
+            break
+        elif number_of_blocks < total:
+            height = i - 1
             break
 
         
