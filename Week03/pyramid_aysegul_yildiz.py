@@ -1,15 +1,11 @@
-def calculate_pyramid_height(number_of_blocks):
-    height = 0
-    used_blocks = 0
+import math
 
-    for level in range(1, number_of_blocks + 1):
-        # Taş ihtiyacı: level*(level+1)/2
-        blocks_needed = level * (level + 1) // 2
+def calculate_pyramid_height(n: int) -> int:
+    if n <= 0:
+        return 0
 
-        if used_blocks + blocks_needed > number_of_blocks:
-            break
+    # h(h+1)/2 <= n → h ≤ (sqrt(1 + 8*n) - 1) / 2
+    
+    h = (math.isqrt(1 + 8*n) - 1) // 2
+    return int(h)
 
-        used_blocks += blocks_needed
-        height = level
-
-    return height
