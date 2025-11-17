@@ -1,7 +1,7 @@
 def calculate_pyramid_height(number_of_blocks):
 
     height = 0
-    blocks__for_next_layer = 1
+    blocks_for_next_layer = 1
     
     while number_of_blocks >= blocks_for_next_layer:
 
