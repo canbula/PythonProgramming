@@ -2,7 +2,7 @@ import inspect
 
 custom_power = lambda x = 0, /,  e = 1 : x ** e
 
-def custom_equation(x = 0, y = 0, /, a = 1, b = 1, *, c = 1):
+def custom_equation(x=0, y=0, /, a=1, b=1, *, c=1) -> float:
     """
     This function calculates (x ** a + y ** b) / c.
     
