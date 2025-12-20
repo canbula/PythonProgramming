@@ -1,33 +1,33 @@
 import time
 import tracemalloc
-from functools import wraps
+from functools import update_wrapper
 
 
-def performance(func):
+class performance:
     """
     A decorator which measures the performance of functions and
     also saves some statistics.
     """
 
-    @wraps(func)
-    def wrapper(*args, **kwargs):
+    def __init__(self, func):
+        self.func = func
+        self.counter = 0
+        self.total_time = 0.0
+        self.total_mem = 0
+        update_wrapper(self, func)
+
+    def __call__(self, *args, **kwargs):
         tracemalloc.start()
         start_time = time.perf_counter()
 
-        result = func(*args, **kwargs)
+        result = self.func(*args, **kwargs)
 
         end_time = time.perf_counter()
         current, peak = tracemalloc.get_traced_memory()
         tracemalloc.stop()
 
-        wrapper.counter += 1
-        wrapper.total_time += (end_time - start_time)
-        wrapper.total_mem += peak
+        self.counter += 1
+        self.total_time += (end_time - start_time)
+        self.total_mem += peak
 
         return result
-
-    wrapper.counter = 0
-    wrapper.total_time = 0.0
-    wrapper.total_mem = 0
-
-    return wrapper
