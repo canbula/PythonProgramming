@@ -1,5 +1,3 @@
-import inspect
-
 custom_power = lambda x = 0, /,  e = 1 : x ** e
 
 def custom_equation(x: int = 0, y: int = 0, /, a: int = 1, b: int = 1, *, c: int = 1) -> float:
@@ -19,8 +17,7 @@ def fn_w_counter() -> (int, dict[str, int]):
         fn_w_counter.total_count = 0
         fn_w_counter.caller_dict = {}
 
-    caller_frame = inspect.currentframe().f_back
-    caller_name = caller_frame.f_globals['__name__']
+    caller_name = fn_w_counter.__module__
 
     fn_w_counter.total_count += 1
 
@@ -30,5 +27,7 @@ def fn_w_counter() -> (int, dict[str, int]):
         fn_w_counter.caller_dict[caller_name] = 1
 
     return fn_w_counter.total_count, fn_w_counter.caller_dict
+
+
 
 
