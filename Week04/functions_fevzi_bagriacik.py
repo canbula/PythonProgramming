@@ -12,7 +12,7 @@ def custom_equation(x: int = 0, y: int = 0, /, a: int = 1, b: int = 1, *, c: int
     :param c: Fifth number (keyword only, default 1)
     :return: (x ** a + y ** b) / c
     """
-    return float((x + y + a + b) / c)
+    return float((x ** a + y ** b) / c)
 
 def fn_w_counter() -> (int, dict[str, int]):
     if not hasattr(fn_w_counter, 'total_count'):
