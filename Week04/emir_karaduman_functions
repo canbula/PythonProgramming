@@ -1,0 +1,25 @@
+custom_power = (lambda x=0, /, e=1: x ** e)
+
+def custom_equation(x: int = 0, y: int = 0, /, a: int = 1, b: int = 1, *, c: int = 1) -> float:
+    
+    if not isinstance(x, int):
+        raise TypeError("x must be int")
+    if not isinstance(y, int):
+        raise TypeError("y must be int")
+    if not isinstance(a, int):
+        raise TypeError("a must be int")
+    if not isinstance(b, int):
+        raise TypeError("b must be int")
+    if not isinstance(c, int):
+        raise TypeError("c must be int")
+
+    return (x ** a + y ** b) / c
+
+_fn_w_counter_total = 0
+
+def fn_w_counter():
+    global _fn_w_counter_total
+    _fn_w_counter_total += 1
+    return _fn_w_counter_total, {__name__: _fn_w_counter_total}
+
+fn_w_counter.__annotations__ = {"return": (int, dict[str, int])}
