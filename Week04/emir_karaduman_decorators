@@ -1,0 +1,38 @@
+import time
+import tracemalloc
+from functools import wraps
+
+
+if not tracemalloc.is_tracing():
+    tracemalloc.start()
+
+def performance(func):
+
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        t0 = time.perf_counter()
+
+        snap_before = tracemalloc.take_snapshot()
+        try:
+            result = func(*args, **kwargs)
+        finally:
+            snap_after = tracemalloc.take_snapshot()
+            dt = time.perf_counter() - t0
+
+            stats = snap_after.compare_to(snap_before, "lineno")
+            mem_diff = 0
+            for s in stats:
+                if s.size_diff > 0:
+                    mem_diff += s.size_diff
+
+            performance.counter += 1
+            performance.total_time += dt
+            performance.total_mem += mem_diff
+
+        return result
+
+    return wrapper
+
+performance.counter = 0
+performance.total_time = 0.0
+performance.total_mem = 0
