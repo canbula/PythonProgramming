@@ -1,0 +1,31 @@
+import re
+
+class Emails(list):
+    def __init__(self, emails):
+        self.validate(emails)
+
+        unique = []
+        for e in emails:
+            e = e.strip()
+            if e not in unique:
+                unique.append(e)
+
+        super().__init__(unique)
+        self.data = unique
+
+    @staticmethod
+    def validate(emails):
+        if not all(isinstance(e, str) for e in emails):
+            raise ValueError("All items must be strings")
+
+        pattern = re.compile(r"^[^@]+@[^@]+\.[^@]+$")
+
+        for e in emails:
+            if not pattern.match(e.strip()):
+                raise ValueError("Invalid email address")
+
+    def __repr__(self):
+        return f"Emails({list(self.data)!r})"
+
+    def __str__(self):
+        return ", ".join(self.data)
