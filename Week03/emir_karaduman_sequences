@@ -1,0 +1,20 @@
+def remove_duplicates(seq: list) -> list:
+    seen = set()
+    result = []
+    for item in seq:
+        if item not in seen:
+            seen.add(item)
+            result.append(item)
+    return result
+
+def list_counts(seq: list) -> dict:
+    counts = {}
+    for item in seq:
+        counts[item] = counts.get(item, 0) + 1
+    return counts
+
+def reverse_dict(d: dict) -> dict:
+    reversed_d = {}
+    for k, v in d.items():
+        reversed_d[v] = k 
+    return reversed_d
