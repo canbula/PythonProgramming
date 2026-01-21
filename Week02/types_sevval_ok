@@ -1,0 +1,10 @@
+sevval_ok_int = 51
+sevval_ok_float = 8.4201
+sevval_ok_bool = True
+sevval_ok_str = "String türde ismim ve soyismim " 
+sevval_ok_complex = 8 + 6j
+print(f"Integer: {sevval_ok_int} (Tip: {type(sevval_ok_int)})")
+print(f"Float: {sevval_ok_float} (Tip: {type(sevval_ok_float)})")
+print(f"Boolean: {sevval_ok_bool} (Tip: {type(sevval_ok_bool)})")
+print(f"String: {sevval_ok_str} (Tip: {type(sevval_ok_str)})")
+print(f"Complex: {sevval_ok_complex} (Tip: {type(sevval_ok_complex)})")
