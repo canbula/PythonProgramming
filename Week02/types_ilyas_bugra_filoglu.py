@@ -1,4 +1,4 @@
-myint = 5
-myfloat = 6.84
-mybool = False
-mycomplex = 3 + 4j
+my_int = 5
+my_float = 6.84
+my_bool = False
+my_complex = 3 + 4j
