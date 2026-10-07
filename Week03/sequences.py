@@ -1,14 +1,13 @@
 def remove_duplicates(a_list):
     my_list = a_list[:]
-    x = 1
-    for i in my_list:
-        for j in my_list[x:]:
-            if i == j:
-                my_list.remove(i)
-                x -=1
-                break
-        x +=1
-    
+    for i in a_list:
+        x = True
+        for j, k in enumerate(my_list):
+            if i == k:
+                if x:
+                    x = False
+                else:
+                    del my_list[j]
     return my_list
 def list_counts(a_list):
     my_list = a_list[:]
@@ -35,6 +34,6 @@ def reverse_dict(a_dict):
     return my_dict
 
 if __name__ == "__main__":
-    print(remove_duplicates([1,5,4,4,4,6,41,54,54,41,6]))
+    print(remove_duplicates([1,5,5,4,4,4,6,6,6,41,41,41,41,41,41,54,54,54,54,54,54,54,54,41,6]))
     print(list_counts([1,5,5,4,4,4,6,6,6,41,41,41,41,41,54,54,54,54,54,54,54,54,41,6]))
     print(reverse_dict(list_counts([1,5,5,4,4,4,6,6,6,41,41,41,41,41,54,54,54,54,54,54,54,54,41,6])))
