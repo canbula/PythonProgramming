@@ -1,2 +1,2 @@
-Student_id = "220315050"
-Full_name = "Ferhat Kılıç"
+student_id = "220315050"
+full_name = "Ferhat Kılıç"
