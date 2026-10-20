@@ -1,4 +1,4 @@
-ef remove_duplicates(seq: list) -> list:
+def remove_duplicates(seq: list) -> list:
     result = []
     for item in seq:
         if item not in result:
