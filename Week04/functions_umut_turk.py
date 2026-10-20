@@ -1,18 +1,22 @@
 custom_power = lambda x= 0, /, e = 1: x ** e
 
 def custom_equation(x: int = 0, y: int = 0, /, a: int = 1, b: int = 1, *, c: int = 1) -> float:
-    """_summary_
+    """Calculate custom polynomial equation result.
 
-    Args:
-        x (int, optional): _description_. Defaults to 0. positional only
-        y (int, optional): _description_. Defaults to 0. positional only
-        a (int, optional): _description_. Defaults to 1. positional or keyword
-        b (int, optional): _description_. Defaults to 1. positional or keyword
-        c (int, optional): _description_. Defaults to 1. keyword only
+    Calculates :math:`\\frac{x^a + y^b}{c}`.
 
-    Returns:
-        float: _description_
-        x**a + y**b / c
+    :param x: Positional-only x value, defaults to 0
+    :type x: int, optional
+    :param y: Positional-only y value, defaults to 0
+    :type y: int, optional
+    :param a: Positional-or-keyword exponent for x, defaults to 1
+    :type a: int, optional
+    :param b: Positional-or-keyword exponent for y, defaults to 1
+    :type b: int, optional
+    :param c: Keyword-only denominator, defaults to 1
+    :type c: int, optional
+    :return: Result of (x**a + y**b) / c
+    :rtype: float
     """
     return (x**a + y**b) / c
 
