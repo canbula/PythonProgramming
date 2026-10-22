@@ -1,5 +1,3 @@
-import sys
-
 custom_power = lambda x=0, /, e=1: x ** e
 
 
@@ -29,8 +27,8 @@ def _make_counter():
     calls = {"count": 0}
     by_caller = {}
 
-    def fn_w_counter() -> tuple[int, dict[str, int]]:
-        name = sys._getframe(1).f_globals.get("__name__")
+    def fn_w_counter() -> (int, dict[str, int]):
+        name = fn_w_counter.__module__
         calls["count"] += 1
         if name in by_caller:
             by_caller[name] += 1
