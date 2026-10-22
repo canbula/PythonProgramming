@@ -1,5 +1,3 @@
-import inspect
-
 custom_power = lambda x=0, /, e=1: x ** e
 
 
@@ -30,11 +28,9 @@ _call_count = 0
 _caller_counts: dict[str, int] = {}
 
 
-def fn_w_counter() -> tuple[int, dict[str, int]]:
+def fn_w_counter() -> (int, dict[str, int]):
     global _call_count
-    frame = inspect.stack()[1].frame
-    caller_name = frame.f_globals["__name__"]
-    del frame
+    caller_name = globals()["__name__"]
     _call_count += 1
     _caller_counts[caller_name] = _caller_counts.setdefault(caller_name, 0) + 1
     return (_call_count, dict(_caller_counts))
