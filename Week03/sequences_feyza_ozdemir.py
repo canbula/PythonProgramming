@@ -1,6 +1,6 @@
 def remove_duplicates(seq: list) -> list:
     """
-    This function removes duplicates from a list while preserving order.
+    This function removes duplicates from a list.
     """
     result = []
     for item in seq:
