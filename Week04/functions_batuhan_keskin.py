@@ -1,38 +1,71 @@
-import inspect
+"""Week04 - Introduction to Python: functions."""
 
-custom_power = lambda x=0, /, e=1: x**e  # noqa: E731
+import sys
+
+# x positional-only (default 0), e positional-or-keyword (default 1)
+custom_power = lambda x=0, /, e=1: x ** e
 
 
-def custom_equation(x: int = 0, y: int = 0, /, a: int = 1, b: int = 1, *, c: int = 1) -> float:
+def custom_equation(
+    x: int = 0,
+    y: int = 0,
+    /,
+    a: int = 1,
+    b: int = 1,
+    *,
+    c: int = 1,
+) -> float:
     """
-    Calculate custom equation.
+    Calculate (x**a + y**b) / c.
 
-    :param x: Positional-only base for first term, default 0
+    :param x: first base (positional-only)
     :type x: int
-    :param y: Positional-only base for second term, default 0
+    :param y: second base (positional-only)
     :type y: int
-    :param a: Exponent for first term, default 1
+    :param a: exponent of x (positional-or-keyword)
     :type a: int
-    :param b: Exponent for second term, default 1
+    :param b: exponent of y (positional-or-keyword)
     :type b: int
-    :param c: Keyword-only divisor, default 1
+    :param c: divisor (keyword-only)
     :type c: int
-    :return: Computed float result of (x**a + y**b) / c
+    :return: the value of (x**a + y**b) / c
     :rtype: float
     """
-    return float((x**a + y**b) / c)
+    return (x ** a + y ** b) / c
 
 
-def fn_w_counter() -> (int, dict[str, int]):
-    if not hasattr(fn_w_counter, "total_calls"):
-        fn_w_counter.total_calls = 0
-        fn_w_counter.callers = {}
+_call_counts: dict[str, int] = {}
+_total_calls: int = 0
 
-    fn_w_counter.total_calls += 1
 
-    caller_frame = inspect.currentframe().f_back
-    caller_name = caller_frame.f_globals.get("__name__", "__main__")
+def fn_w_counter() -> tuple[int, dict[str, int]]:
+    """
+    Count the calls made to this function together with caller information.
 
-    fn_w_counter.callers[caller_name] = fn_w_counter.callers.get(caller_name, 0) + 1
+    :return: total number of calls and a dictionary mapping each caller's
+        ``__name__`` to the number of calls made from that caller
+    :rtype: tuple[int, dict[str, int]]
+    """
+    global _total_calls
+    caller = sys._getframe(1).f_globals.get("__name__", "<unknown>")
+    _total_calls += 1
+    _call_counts[caller] = _call_counts.get(caller, 0) + 1
+    return _total_calls, dict(_call_counts)
 
-    return fn_w_counter.total_calls, fn_w_counter.callers
+
+if __name__ == "__main__":
+    assert custom_power(2) == 2
+    assert custom_power(2, 3) == 8
+    assert custom_power(2, e=2) == 4
+
+    assert custom_equation(2, 3) == 5.0
+    assert custom_equation(2, 3, 2) == 7.0
+    assert custom_equation(2, 3, 2, 3) == 31.0
+    assert custom_equation(3, 5, a=2, b=3, c=4) == 33.5
+    assert custom_equation(3, 5, 2, b=3, c=4) == 33.5
+    assert custom_equation(3, 5, 2, 3, c=4) == 33.5
+
+    for i in range(10):
+        fn_w_counter()
+    assert fn_w_counter() == (11, {'__main__': 11})
+    print("All examples passed.")
