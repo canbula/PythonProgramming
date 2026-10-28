@@ -60,4 +60,3 @@ if __name__ == "__main__":
     for i in range(10):
         fn_w_counter()
     assert fn_w_counter() == (11, {"__main__": 11})
-    print("All examples pass.")
