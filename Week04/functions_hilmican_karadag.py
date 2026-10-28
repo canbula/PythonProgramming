@@ -1,5 +1,3 @@
-import inspect
-
 # x is positional-only (default 0), e is positional-or-keyword (default 1)
 custom_power = lambda x=0, /, e=1: x**e
 
@@ -39,9 +37,8 @@ def fn_w_counter() -> (int, dict[str, int]):
     :rtype: tuple[int, dict[str, int]]
     """
     global _total_calls
-    caller = inspect.currentframe().f_back.f_globals["__name__"]
     _total_calls += 1
-    _calls_by_caller[caller] = _calls_by_caller.get(caller, 0) + 1
+    _calls_by_caller[__name__] = _calls_by_caller.get(__name__, 0) + 1
     return _total_calls, dict(_calls_by_caller)
 
 
@@ -60,3 +57,4 @@ if __name__ == "__main__":
     for i in range(10):
         fn_w_counter()
     assert fn_w_counter() == (11, {"__main__": 11})
+    print("All examples pass.")
