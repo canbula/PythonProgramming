@@ -1,7 +1,5 @@
 """Week04 - Introduction to Python: functions."""
 
-import sys
-
 # x positional-only (default 0), e positional-or-keyword (default 1)
 custom_power = lambda x=0, /, e=1: x ** e
 
@@ -47,7 +45,7 @@ def fn_w_counter() -> (int, dict[str, int]):
     :rtype: tuple[int, dict[str, int]]
     """
     global _total_calls
-    caller = sys._getframe(1).f_globals.get("__name__", "<unknown>")
+    caller = __name__
     _total_calls += 1
     _call_counts[caller] = _call_counts.get(caller, 0) + 1
     return _total_calls, dict(_call_counts)
