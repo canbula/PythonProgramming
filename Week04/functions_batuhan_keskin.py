@@ -38,7 +38,7 @@ _call_counts: dict[str, int] = {}
 _total_calls: int = 0
 
 
-def fn_w_counter() -> tuple[int, dict[str, int]]:
+def fn_w_counter() -> (int, dict[str, int]):
     """
     Count the calls made to this function together with caller information.
 
