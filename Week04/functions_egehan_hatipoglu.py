@@ -22,7 +22,8 @@ counter = 0
 callers = {}
 
 
-def fn_w_counter() -> tuple:
+def fn_w_counter() -> tuple[int, dict[str, int]]:
+  
     global counter
 
     counter += 1
