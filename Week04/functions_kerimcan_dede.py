@@ -10,13 +10,13 @@ def custom_equation(x: int=0, y: int=0, /, a: int=1, b: int=1, *, c: int=1) -> f
     :param4: power of the second number
     :param5: divisor of sum of exponantiated numbers
 
-    :result: division the sum of exponantiated numbers
+    :return: division the sum of exponantiated numbers
     """
     return (x**a + y**b) / c
 
 call_counter = 0
 caller_dict = {}
-def fn_w_counter() -> (int, dict):
+def fn_w_counter() -> (int, dict[str, int]):
     caller = __name__
     global call_counter
     call_counter += 1
