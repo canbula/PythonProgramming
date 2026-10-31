@@ -1,5 +1,3 @@
-import inspect
-
 custom_power = lambda x=0, /, e=1: x ** e
 
 
@@ -28,6 +26,9 @@ def custom_equation(
     :return: The result of (x**a + y**b) / c as a float.
     :rtype: float
     """
+    if not (type(x) is int and type(y) is int and type(a) is int and type(b) is int and type(c) is int):
+        raise TypeError("All parameters must be integers.")
+    
     return float((x ** a + y ** b) / c)
 
 
@@ -38,11 +39,10 @@ def fn_w_counter() -> (int, dict[str, int]):
     :return: The total call count and a dictionary of caller counts.
     :rtype: (int, dict[str, int])
     """
-    caller_frame = inspect.currentframe().f_back
-    caller_name = caller_frame.f_globals.get("__name__", "__main__") if caller_frame else "__main__"
+    caller = __name__
 
     fn_w_counter.total_calls += 1
-    fn_w_counter.caller_counts[caller_name] = fn_w_counter.caller_counts.get(caller_name, 0) + 1
+    fn_w_counter.caller_counts[caller] = fn_w_counter.caller_counts.get(caller, 0) + 1
 
     return fn_w_counter.total_calls, dict(fn_w_counter.caller_counts)
 
