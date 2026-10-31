@@ -31,12 +31,12 @@ def custom_equation(
     return float((x ** a + y ** b) / c)
 
 
-def fn_w_counter() -> tuple[int, dict[str, int]]:
+def fn_w_counter() -> (int, dict[str, int]):
     """
     This function counts total function calls and tracks calls per caller module.
 
-    :return: A tuple containing the total call count and a dictionary of caller counts.
-    :rtype: tuple[int, dict[str, int]]
+    :return: The total call count and a dictionary of caller counts.
+    :rtype: (int, dict[str, int])
     """
     caller_frame = inspect.currentframe().f_back
     caller_name = caller_frame.f_globals.get("__name__", "__main__") if caller_frame else "__main__"
