@@ -1,0 +1,41 @@
+import time
+import tracemalloc
+from functools import wraps
+
+def performance(func):
+    call_count = 0
+    total_time = 0.0
+    total_mem = 0
+
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        nonlocal call_count, total_time, total_mem
+
+        tracing_started = tracemalloc.is_tracing()
+
+        if not tracing_started:
+            tracemalloc.start()
+
+        tracemalloc.reset_peak()
+        start_time = time.perf_counter()
+
+        try:
+            result = func(*args, **kwargs)
+            return result
+
+        finally:
+            end_time = time.perf_counter()
+            current_mem, peak_mem = tracemalloc.get_traced_memory()
+
+            call_count += 1
+            total_time += end_time - start_time
+            total_mem += peak_mem
+
+            if not tracing_started:
+                tracemalloc.stop()
+
+    wrapper.call_count = lambda: call_count
+    wrapper.total_time = lambda: total_time
+    wrapper.total_mem = lambda: total_mem
+
+    return wrapper
