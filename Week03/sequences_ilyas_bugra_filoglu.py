@@ -5,11 +5,11 @@ def remove_duplicates(seq: list) -> list:
             production.append(item)
     return production
 
-def list_count(seq: list) -> dict:
-    count = {}
+def list_counts(seq: list) -> dict:
+    counts = {}
     for item in seq:
-        count[item] = count.get(item, 0) + 1
-    return count
+        counts[item] = counts.get(item, 0) + 1
+    return counts
 
 def reverse_dict(d: dict) -> dict:
     return {value: key for key, value in d.items()}
