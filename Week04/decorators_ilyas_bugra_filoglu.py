@@ -1,7 +1,3 @@
-performance.counter = 0
-performance.total_time = 0.0
-performance.total_mem = 0
-
 import time
 import tracemalloc
 from functools import wraps
