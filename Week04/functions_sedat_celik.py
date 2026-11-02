@@ -21,7 +21,7 @@ def custom_equation(x: int = 0 , y: int = 0 , / , a: int =1 , b: int =1, * , c: 
     return float((x**a + y**b) / c)
 
 
-def fn_w_counter() -> tuple[int, dict[str, int]]:
+def fn_w_counter() -> (int, dict[str, int]):
     if not hasattr(fn_w_counter, "total_calls"):
         fn_w_counter.total_calls = 0
         fn_w_counter.caller_counts = {}
