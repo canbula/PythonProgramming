@@ -1,7 +1,7 @@
-custom_pow = lambda a=0,/,e=1: a ** e
+custom_power = lambda x=0,/,e=1: x ** e
 
-def custom_equation(a: int = 0 , b: int = 0, / , x: int = 1, y: int = 1, * , z: int = 1) -> float:
-    return (a**x + b**y) / z
+def custom_equation(x: int = 0 , y: int = 0, / , a: int = 1, b: int = 1, * , c: int = 1) -> float:
+    return (x**a + y**b) / c
 
 
 def fn_w_counter() -> (int, dict[str, int]): 
