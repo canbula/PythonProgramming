@@ -1,6 +1,3 @@
-import inspect
-
-
 custom_power = lambda x=0, /, e=1: x ** e
 
 
@@ -31,8 +28,7 @@ def fn_w_counter() -> (int, dict[str, int]):
     if not hasattr(fn_w_counter, "counts"):
         fn_w_counter.counts = {}
 
-    frame = inspect.currentframe().f_back
-    caller_name = frame.f_globals.get("__name__", "__main__")
+    caller_name = fn_w_counter.__module__
 
     counts = fn_w_counter.counts
     counts[caller_name] = counts.get(caller_name, 0) + 1
