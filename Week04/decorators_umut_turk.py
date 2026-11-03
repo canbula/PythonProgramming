@@ -4,7 +4,7 @@ import tracemalloc
 def performance(f):
     def _performance(*args, **kwargs):
         if not hasattr(_performance, "counter"):
-            counter = 0
+            _performance.counter = 0
         _performance.counter += 1 
         x = time.time()
         tracemalloc.start()
