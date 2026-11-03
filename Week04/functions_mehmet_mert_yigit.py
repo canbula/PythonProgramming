@@ -1,7 +1,7 @@
 import inspect
 
 
-custom_power = lambda x=0, e=1, /: x ** e
+custom_power = lambda x=0, /, e=1: x ** e
 
 
 def custom_equation(
@@ -21,13 +21,13 @@ def custom_equation(
     :param a: Exponent of x.
     :param b: Exponent of y.
     :param c: Divisor.
-    :return: Result of the equation.
+    :return: The calculated result.
     :rtype: float
     """
     return float((x ** a + y ** b) / c)
 
 
-def fn_w_counter():
+def fn_w_counter() -> tuple[int, dict[str, int]]:
     if not hasattr(fn_w_counter, "counts"):
         fn_w_counter.counts = {}
 
