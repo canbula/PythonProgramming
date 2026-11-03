@@ -19,7 +19,7 @@ def performance(f):
         x = time.time()
         
         ret = f(*args, **kwargs)
-        performance.total_time = time.time() - x
+        performance.total_time += time.time() - x
         performance.total_mem = tracemalloc.get_traced_memory()[1]
         tracemalloc.stop()
         return ret
