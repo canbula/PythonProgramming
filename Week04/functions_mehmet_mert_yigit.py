@@ -5,7 +5,7 @@ custom_power = lambda x=0, /, e=1: x ** e
 
 
 def custom_equation(
-    x: int,
+    x: int = 0,
     y: int = 0,
     /,
     a: int = 1,
@@ -27,12 +27,12 @@ def custom_equation(
     return float((x ** a + y ** b) / c)
 
 
-def fn_w_counter() -> tuple[int, dict[str, int]]:
+def fn_w_counter() -> (int, dict[str, int]):
     if not hasattr(fn_w_counter, "counts"):
         fn_w_counter.counts = {}
 
-    caller = inspect.currentframe().f_back
-    caller_name = caller.f_code.co_name
+    frame = inspect.currentframe().f_back
+    caller_name = frame.f_globals.get("__name__", "__main__")
 
     counts = fn_w_counter.counts
     counts[caller_name] = counts.get(caller_name, 0) + 1
