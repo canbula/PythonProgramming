@@ -8,8 +8,8 @@ def performance(f):
         _performance.counter += 1 
         tracemalloc.start()
         x = time.time()
-        f(args, kwargs)
+        f(*args, **kwargs)
         total_time = time.time() - x
-        total_mem = tracemalloc.get_traced_memory
-        tracemalloc.stop
+        total_mem = tracemalloc.get_traced_memory()
+        tracemalloc.stop()
     return _performance
