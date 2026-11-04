@@ -11,7 +11,7 @@ def custom_equation(x: int=0 ,y: int=0,/,a: int=1,b: int=1,*,c: int=1) ->float:
     :param a:power of the first number
     :param b:power of the second number
     :param c:divisor of the sum of exponentiated
-    :return:returns the result of the equation
+    :return:the result of the equation
 
     """
     return (x**a + y**b) / c
