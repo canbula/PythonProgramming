@@ -18,31 +18,21 @@ def custom_equation(x: int = 0, y: int = 0, /, a: int = 1, b: int = 1, *, c: int
     :return: The calculated value
     :rtype: float
     """
-    first_term = x ** a
-    second_term = y ** b
-    return float((first_term + second_term) / c)
+    for name, value in (("x", x), ("y", y), ("a", a), ("b", b), ("c", c)):
+        if type(value) is not int:
+            raise TypeError(f"{name} must be an int")
+    return float((x ** a + y ** b) / c)
 
 
-def fn_w_counter() -> tuple[int, dict[str, int]]:
+def fn_w_counter() -> (int, dict[str, int]):
     if not hasattr(fn_w_counter, "call_count"):
         fn_w_counter.call_count = 0
         fn_w_counter.callers = {}
 
-    try:
-        raise Exception
-    except Exception as error:
-        caller = error.__traceback__.tb_frame.f_back.f_globals["__name__"]
-
     fn_w_counter.call_count += 1
-    if caller in fn_w_counter.callers:
-        fn_w_counter.callers[caller] += 1
+    if __name__ in fn_w_counter.callers:
+        fn_w_counter.callers[__name__] += 1
     else:
-        fn_w_counter.callers[caller] = 1
+        fn_w_counter.callers[__name__] = 1
 
     return fn_w_counter.call_count, fn_w_counter.callers
-
-
-if __name__ == "__main__":
-    for _ in range(10):
-        fn_w_counter()
-    print(fn_w_counter())
