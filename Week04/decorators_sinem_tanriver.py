@@ -1,11 +1,8 @@
 import time
 import tracemalloc
-from functools import wraps
 
 
 def performance(func):
-    """Measures time and memory of the decorated function and keeps statistics."""
-    @wraps(func)
     def wrapper(*args, **kwargs):
         started_here = not tracemalloc.is_tracing()
         if started_here:
@@ -22,8 +19,15 @@ def performance(func):
         performance.total_time += elapsed
         performance.total_mem += peak
         return result
+
+    wrapper.__name__ = func.__name__
+    wrapper.__doc__ = func.__doc__
     return wrapper
 
+
+performance.counter = 0
+performance.total_time = 0
+performance.total_mem = 0
 
 performance.counter = 0
 performance.total_time = 0
