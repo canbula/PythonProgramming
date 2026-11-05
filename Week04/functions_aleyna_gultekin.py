@@ -23,20 +23,26 @@ def custom_equation(x: int = 0, y: int = 0, /, a: int = 1, b: int = 1, *, c: int
     return float((first_term + second_term) / c)
 
 
-def _make_counter():
-    calls = {"count": 0}
-    by_caller = {}
+def fn_w_counter() -> tuple[int, dict[str, int]]:
+    if not hasattr(fn_w_counter, "call_count"):
+        fn_w_counter.call_count = 0
+        fn_w_counter.callers = {}
 
-    def fn_w_counter() -> (int, dict[str, int]):
-        name = fn_w_counter.__module__
-        calls["count"] += 1
-        if name in by_caller:
-            by_caller[name] += 1
-        else:
-            by_caller[name] = 1
-        return calls["count"], by_caller
+    try:
+        raise Exception
+    except Exception as error:
+        caller = error.__traceback__.tb_frame.f_back.f_globals["__name__"]
 
-    return fn_w_counter
+    fn_w_counter.call_count += 1
+    if caller in fn_w_counter.callers:
+        fn_w_counter.callers[caller] += 1
+    else:
+        fn_w_counter.callers[caller] = 1
+
+    return fn_w_counter.call_count, fn_w_counter.callers
 
 
-fn_w_counter = _make_counter()
+if __name__ == "__main__":
+    for _ in range(10):
+        fn_w_counter()
+    print(fn_w_counter())
