@@ -1,6 +1,4 @@
 
-import inspect
-
 custom_power = lambda x=0, /, e=1: x ** e
 
 
@@ -14,25 +12,30 @@ def custom_equation(
     c: int = 1
 ) -> float:
     """
-    Calculate the result of a custom equation.
+    Calculate a mathematical equation.
 
     :param x: First integer.
     :param y: Second integer.
-    :param a: Exponent of x.
-    :param b: Exponent of y.
+    :param a: Exponent for x.
+    :param b: Exponent for y.
     :param c: Divisor.
-    :return: Result of the equation.
+    :return: Calculated result.
     """
     return (x ** a + y ** b) / c
 
 
+total_calls = 0
+calls_by_module = {}
+
+
 def fn_w_counter() -> (int, dict[str, int]):
-    caller = inspect.currentframe().f_back.f_globals["__name__"]
+    global total_calls
 
-    if not hasattr(fn_w_counter, "counts"):
-        fn_w_counter.counts = {}
+    total_calls += 1
+    module_name = __name__
 
-    counts = fn_w_counter.counts
-    counts[caller] = counts.get(caller, 0) + 1
+    calls_by_module[module_name] = (
+        calls_by_module.get(module_name, 0) + 1
+    )
 
-    return sum(counts.values()), counts.copy()
+    return total_calls, calls_by_module.copy()
