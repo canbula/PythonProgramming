@@ -26,7 +26,7 @@ def custom_equation(
     return (x ** a + y ** b) / c
 
 
-def fn_w_counter() -> tuple[int, dict[str, int]]:
+def fn_w_counter() -> (int, dict[str, int]):
     caller = inspect.currentframe().f_back.f_globals["__name__"]
 
     if not hasattr(fn_w_counter, "counts"):
