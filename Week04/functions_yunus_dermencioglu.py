@@ -31,8 +31,10 @@ def fn_w_counter() -> (int, dict[str, int]):
         fn_w_counter.counter = 0
         fn_w_counter.callers = {}
 
-    caller_frame = inspect.currentframe().f_back
-    caller_name = caller_frame.f_globals.get("__name__", "__main__")
+    caller_name = inspect.currentframe().f_back.f_code.co_name
+
+    if caller_name == "<module>":
+        caller_name = "__main__"
 
     fn_w_counter.counter += 1
 
