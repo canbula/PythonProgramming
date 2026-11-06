@@ -1,11 +1,9 @@
 import inspect
 
 
-# Calculate the power of a number
 custom_power = lambda x=0, /, e=1: x ** e
 
 
-# Calculate the result of a mathematical equation
 def custom_equation(
     x: int = 0,
     y: int = 0,
@@ -20,16 +18,15 @@ def custom_equation(
 
     :param x: First integer value.
     :param y: Second integer value.
-    :param a: Coefficient of x.
-    :param b: Coefficient of y.
+    :param a: Exponent of x.
+    :param b: Exponent of y.
     :param c: Divisor of the equation.
     :return: The calculated result as a float.
     """
-    return (x * a + y * b) / c
+    return (x ** a + y ** b) / c
 
 
-# Count function calls and track caller information
-def fn_w_counter():
+def fn_w_counter() -> tuple[int, dict[str, int]]:
     if not hasattr(fn_w_counter, "counter"):
         fn_w_counter.counter = 0
         fn_w_counter.callers = {}
