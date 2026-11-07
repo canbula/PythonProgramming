@@ -1,14 +1,14 @@
-import functools
 import time
 import tracemalloc
 
 
 def performance(func):
-    @functools.wraps(func)
     def wrapper(*args, **kwargs):
         is_tracing = tracemalloc.is_tracing()
+
         if not is_tracing:
             tracemalloc.start()
+
         tracemalloc.reset_peak()
 
         start_time = time.perf_counter()
@@ -25,6 +25,14 @@ def performance(func):
         performance.total_mem += peak_memory
 
         return result
+
+    # Manually preserve function metadata (replaces functools.wraps)
+    wrapper.__name__ = func.__name__
+    wrapper.__doc__ = func.__doc__
+    wrapper.__module__ = func.__module__
+    wrapper.__qualname__ = func.__qualname__
+    wrapper.__annotations__ = func.__annotations__
+    wrapper.__wrapped__ = func
 
     return wrapper
 
