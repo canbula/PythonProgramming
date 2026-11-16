@@ -17,6 +17,6 @@ def custom_equation(x: int = 0, y: int = 0, /, a: int = 1, b: int = 1, *, c: int
 calls = {}
 
 
-def fn_w_counter() -> tuple[int, dict[str, int]]:
+def fn_w_counter() -> (int, dict[str, int]):
     calls[__name__] = calls.get(__name__, 0) + 1
     return sum(calls.values()), calls
