@@ -3,10 +3,9 @@ import time
 import tracemalloc
 
 def performance(fn):
-
     @functools.wraps(fn)
     def wrapper(*args, **kwargs):
-        wrapper.counter += 1
+        performance.counter += 1
         tracemalloc.start()
         start = time.perf_counter()
 
@@ -17,13 +16,13 @@ def performance(fn):
             current, peak = tracemalloc.get_traced_memory()
             tracemalloc.stop()
 
-            wrapper.total_time += elapsed
-            wrapper.total_mem += peak
+            performance.total_time += elapsed
+            performance.total_mem += peak
 
         return result
 
-    wrapper.counter = 0
-    wrapper.total_time = 0.0
-    wrapper.total_mem = 0
-
     return wrapper
+    
+performance.counter = 0
+performance.total_time = 0.0
+performance.total_mem = 0
