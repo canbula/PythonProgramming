@@ -1,32 +1,29 @@
 import time
 import tracemalloc
-from functools import wraps
 
 
 def performance(fn):
-    @wraps(fn)
-    def wrapper(*args, **kwargs):
+    def _performance(*args, **kwargs):
         if not hasattr(performance, "counter"):
             performance.counter = 0
-            performance.total_time = 0.0
+            performance.total_time = 0
             performance.total_mem = 0
 
         tracemalloc.start()
-        t_start = time.perf_counter()
-        try:
-            return fn(*args, **kwargs)
-        finally:
-            elapsed = time.perf_counter() - t_start
-            _, peak_mem = tracemalloc.get_traced_memory()
-            tracemalloc.stop()
+        t0 = time.perf_counter()
+        res = fn(*args, **kwargs)
+        t1 = time.perf_counter()
+        _, peak_memory = tracemalloc.get_traced_memory()
+        tracemalloc.stop()
 
-            performance.counter += 1
-            performance.total_time += elapsed
-            performance.total_mem += peak_mem
+        performance.counter += 1
+        performance.total_time += t1 - t0
+        performance.total_mem += peak_memory
+        return res
 
-    return wrapper
+    return _performance
 
 
 performance.counter = 0
-performance.total_time = 0.0
+performance.total_time = 0
 performance.total_mem = 0
