@@ -1,18 +1,22 @@
 import time
 import tracemalloc
-from functools import wraps
 
 
 class performance:
-    
-
-    counter = 0        
-    total_time = 0.0  
-    total_mem = 0      
+    counter = 0
+    total_time = 0.0
+    total_mem = 0
 
     def __init__(self, func):
         self.func = func
-        wraps(func)(self)
+        # Replaces functools.wraps(func)(self)
+        for attr in ("__module__", "__name__", "__qualname__", "__doc__"):
+            try:
+                setattr(self, attr, getattr(func, attr))
+            except AttributeError:
+                pass
+        self.__dict__.update(getattr(func, "__dict__", {}))
+        self.__wrapped__ = func
 
     def __call__(self, *args, **kwargs):
         performance.counter += 1
@@ -26,6 +30,10 @@ class performance:
             _, peak = tracemalloc.get_traced_memory()
             tracemalloc.stop()
 
+            performance.total_time += elapsed
+            performance.total_mem += peak
+
+        return result
             performance.total_time += elapsed
             performance.total_mem += peak
 
