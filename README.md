@@ -18,7 +18,7 @@ which you should complete in your own forked repository
 and send a pull request to the original repository.
 
 # Microsoft Teams
-All announcements of this course will be done via Microsoft Teams. Join the group with the invite code: khfjfwr
+All announcements of this course will be done via Microsoft Teams. Join the group with the invite code: w0p5whf
 
 # Additional Resources
 - [Python Documentation](https://docs.python.org/3/)
