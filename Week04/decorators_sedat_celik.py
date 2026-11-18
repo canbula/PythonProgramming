@@ -1,11 +1,8 @@
 import time
 import tracemalloc
-import functools
-
 
 def performance(func):
 
-    @functools.wraps(func)
     def wrapper(*args, **kwargs):
 
         tracemalloc.start()
@@ -25,8 +22,13 @@ def performance(func):
 
             tracemalloc.stop()
 
-    return wrapper
+    for attr in ("__module__", "__name__", "__qualname__", "__doc__", "__annotations__", "__type_params__"):
+        if hasattr(func, attr):
+            setattr(wrapper, attr, getattr(func, attr))
+    wrapper.__dict__.update(getattr(func, "__dict__", {}))
+    wrapper.__wrapped__ = func
 
+    return wrapper
 
 performance.counter = 0
 performance.total_time = 0.0
