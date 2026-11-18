@@ -1,8 +1,3 @@
-import functools
-import time
-import tracemalloc
-
-
 def performance(fn):
     """
     Decorator that measures execution time and memory of the wrapped function.
@@ -11,34 +6,34 @@ def performance(fn):
 
     - ``performance.counter``: number of decorated-function calls
     - ``performance.total_time``: total time spent in seconds
-    - ``performance.total_mem``: total memory consumed in bytes
+    - ``performance.total_mem``: total memory of the returned values in bytes
+
+    No ``import`` statements are used: the clock is loaded with the
+    ``__import__`` builtin and memory is measured with ``__sizeof__``.
 
     :param fn: the function to decorate
     :type fn: callable
     :return: the wrapped function
     :rtype: callable
     """
+    clock = __import__("time").perf_counter
 
-    @functools.wraps(fn)
     def wrapper(*args, **kwargs):
-        started_here = not tracemalloc.is_tracing()
-        if started_here:
-            tracemalloc.start()
-        tracemalloc.reset_peak()
-        mem_before = tracemalloc.get_traced_memory()[0]
-        start = time.perf_counter()
-
+        start = clock()
+        result = None
         try:
-            return fn(*args, **kwargs)
+            result = fn(*args, **kwargs)
+            return result
         finally:
-            elapsed = time.perf_counter() - start
-            peak = tracemalloc.get_traced_memory()[1]
-            if started_here:
-                tracemalloc.stop()
             performance.counter += 1
-            performance.total_time += elapsed
-            performance.total_mem += max(peak - mem_before, 0)
+            performance.total_time += clock() - start
+            performance.total_mem += result.__sizeof__()
 
+    wrapper.__name__ = fn.__name__
+    wrapper.__qualname__ = fn.__qualname__
+    wrapper.__doc__ = fn.__doc__
+    wrapper.__module__ = fn.__module__
+    wrapper.__wrapped__ = fn
     return wrapper
 
 
