@@ -1,10 +1,10 @@
 import time
 import tracemalloc
-from functools import wraps
+
 
 
 def performance(func):
-    @wraps(func)
+   
     def wrapper(*args, **kwargs):
         performance.counter += 1
 
