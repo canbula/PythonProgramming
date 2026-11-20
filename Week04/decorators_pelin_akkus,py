@@ -1,0 +1,31 @@
+from functools import wraps
+from time import perf_counter
+import tracemalloc
+
+def performance(func):
+    """Track how many times a function runs, its time and memory use."""
+
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        wrapper.counter += 1
+        was_tracing = tracemalloc.is_tracing()
+        if not was_tracing:
+            tracemalloc.start()
+
+        # Check the memory usage before running the function.
+        memory_before, _ = tracemalloc.get_traced_memory()
+        start_time = perf_counter()
+
+        try:
+            return func(*args, **kwargs)
+        finally:
+            wrapper.total_time += perf_counter() - start_time
+            _, peak_memory = tracemalloc.get_traced_memory()
+            wrapper.total_mem += max(0, peak_memory - memory_before)
+            if not was_tracing:
+                tracemalloc.stop()
+
+    wrapper.counter = 0
+    wrapper.total_time = 0.0
+    wrapper.total_mem = 0
+    return wrapper
