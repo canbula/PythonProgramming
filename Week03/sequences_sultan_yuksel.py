@@ -9,9 +9,9 @@ def list_counts(seq: list) -> dict:
   counts = {}
   for i  in seq:
     if i in counts:
-      count[i] += 1
+      counts[i] += 1
     else:
-      count[i]
+      counts[i]
   return counts
 
 def reverse_dict(d: dict) ->dict:
