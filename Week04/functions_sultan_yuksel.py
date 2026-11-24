@@ -30,6 +30,6 @@ def fn_w_counter() -> tuple[int, dict[str, int]]:
   if __name__ in fn_w_counter.callers:
     fn_w_counter.callers[__name__] += 1
   else:
-    fn_w_counter.callers = 1
+    fn_w_counter.callers[__name__] = 1
   return fn_w_counter.counter, fn_w_counter.callers
   
