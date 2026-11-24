@@ -11,7 +11,7 @@ def list_counts(seq: list) -> dict:
     if i in counts:
       counts[i] += 1
     else:
-      counts[i]
+      counts[i] = 1
   return counts
 
 def reverse_dict(d: dict) ->dict:
